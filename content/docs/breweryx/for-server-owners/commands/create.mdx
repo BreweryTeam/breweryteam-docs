@@ -1,0 +1,20 @@
+---
+title: "/breweryx create"
+hideTitle: true
+---
+
+import { Command, CommandUsability } from "../../../../../src/components/command";
+
+<Command
+    name="/breweryx create"
+    syntax="/breweryx create recipe_name [quantity]"
+    permission="brewery.cmd.create"
+    usability={CommandUsability.ANY}
+/>
+
+Creates a new brew based on the specified recipe.
+
+## Arguments
+
+- `recipe_name`: The name of the recipe.
+- `[quantity]`: The number of brews to create. If not specified, defaults to 1.

@@ -1,0 +1,6 @@
+{
+    "title": "BreweryX",
+    "icon": "/assets/img/logo/breweryx.png",
+    "root": true,
+    "pages": ["...", "gameplay", "for-server-owners", "for-developers", "---Other---", "default-recipes"]
+}

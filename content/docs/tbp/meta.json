@@ -1,0 +1,6 @@
+{
+    "title": "TheBrewingProject",
+    "icon": "/assets/img/logo/tbp.png",
+    "root": true,
+    "pages": ["...", "gameplay", "for-server-owners"]
+}

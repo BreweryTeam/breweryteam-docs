@@ -1,0 +1,81 @@
+---
+title: "Recipe Steps"
+---
+
+## Introduction
+
+By defining a sequence of steps in a recipe, you will specify how a perfect brew has to be made. The real brewing process does not necessarily need to match exactly with the defined recipe steps.
+
+There are 4 different steps that are currently supported by TheBrewingProject:
+
+| Step Type  | ID        |
+| ---------- | --------- |
+| Cooking    | `cook`    |
+| Mixing     | `mix`     |
+| Distilling | `distill` |
+| Aging      | `age`     |
+
+<Callout title="Initial Step">Cooking and mixing always have to be the first step of any brewing process!</Callout>
+
+## Step Format
+
+Each type of step has a unique format
+
+### Cooking step
+
+An example definition of a cooking step:
+
+```yml
+- type: cook
+  cook-time: 2min
+  cauldron-type: water
+  ingredients:
+      - apple/10
+      - my_plugin_name:sugar/64
+```
+
+<Callout title="Ingredients">
+    See [Ingredients Basics](../../reference/basics/#ingredients) for more information about the ingredient format
+</Callout>
+
+### Mix step
+
+An example definition of a mix step:
+
+```yml
+- type: mix
+  mix-time: 2min
+  cauldron-type: water # Not read at the moment
+  ingredients:
+      - brewery:gin/3
+      - sugar/2
+```
+
+<Callout title="Ingredients">
+    See [Ingredients Basics](../../reference/basics/#ingredients) for more information about the ingredient format
+</Callout>
+
+### Distill step
+
+An example definition of a distill step:
+
+```yml
+- type: distill
+  runs: 3
+```
+
+Runs means that a brew would need to be distilled a specific amount of times to get a perfect result.
+
+### Age step
+
+An example definition of an age step:
+
+```yml
+- type: age
+  age-years: 13
+  barrel-type: any
+```
+
+<Callout title="Barrel Types">
+    More about barrel types can be found in [Aging guide](/docs/for-players/brewing/aging/#barrel-types)
+</Callout>

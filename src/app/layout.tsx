@@ -1,17 +1,21 @@
-import { RootProvider } from 'fumadocs-ui/provider/next';
-import './global.css';
-import { Inter } from 'next/font/google';
+import { RootProvider } from "fumadocs-ui/provider/next";
+import "./global.css";
+import { Inter } from "next/font/google";
+import { Banner } from "fumadocs-ui/components/banner";
 
 const inter = Inter({
-  subsets: ['latin'],
+    subsets: ["latin"],
 });
 
-export default function Layout({ children }: LayoutProps<'/'>) {
-  return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
-      <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
-      </body>
-    </html>
-  );
+export default function Layout({ children }: LayoutProps<"/">) {
+    return (
+        <html lang="en" className={inter.className} suppressHydrationWarning>
+            <body className="flex flex-col min-h-screen">
+                <Banner variant="rainbow">
+                    This is a preview of the new documentation, please report any issues you find (well, except TODOs).
+                </Banner>
+                <RootProvider>{children}</RootProvider>
+            </body>
+        </html>
+    );
 }

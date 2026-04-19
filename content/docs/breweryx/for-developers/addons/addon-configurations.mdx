@@ -1,0 +1,47 @@
+---
+title: "Addon Configurations"
+---
+
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+
+### Configuration files in addons
+
+Addons support configuration files using Okaeri config,
+which is a powerful and easy-to-use configuration library.
+
+Lombok is recommended for Java developers to reduce boilerplate code.
+
+<Tabs groupId="language" items={["Java", "Kotlin"]} persist>
+    <Tab value="Java">
+```java title="MyConfig.java"
+@OkaeriConfigFile(fileName = "addon-config.yml")
+@Getter @Setter
+public class MyConfig extends AddonConfigFile {
+    private String message = "Hello, from MyConfig!";
+}
+
+@Override
+public void onAddonEnable() {
+MyConfig config = getAddonConfigManager().getConfig(MyConfig.class);
+getLogger().info(config.getMessage());
+}
+
+````
+    </Tab>
+    <Tab value="Kotlin">
+```kotlin title="MyConfig.kt"
+@OkaeriConfigFile(fileName = "addon-config.yml")
+class MyConfig : AddonConfigFile() {
+    // Do not use 'val' for config keys!
+    var message = "Hello, from MyConfig!"
+}
+
+override fun onAddonEnable() {
+    val config = addonConfigManager.getConfig(MyConfig::class.java)
+    logger.info(config.message)
+}
+````
+
+    </Tab>
+
+</Tabs>
