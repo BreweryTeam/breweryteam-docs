@@ -1,0 +1,40 @@
+---
+title: "/breweryx info"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "../../../../../src/components/command";
+
+<Command
+    name="/breweryx info"
+    subcommands={[
+        {
+            syntax: "/breweryx info",
+            permission: "brewery.cmd.info",
+            headerLink: "#breweryx-info",
+            executor: CommandExecutor.PLAYER_ONLY,
+        },
+        {
+            syntax: "/breweryx info player_name",
+            permission: "brewery.cmd.infoOther",
+            headerLink: "#breweryx-info-player_name",
+            executor: CommandExecutor.ANY,
+        }
+    ]}
+/>
+
+Shows information about a player's intoxication level.
+
+## Subcommands
+
+### `/breweryx info`
+
+Shows your own intoxication level.
+
+### `/breweryx info player_name`
+
+Shows the intoxication level of the specified player. This command can be executed by both players and the console. **Requires a different permission.**
+
+#### Arguments
+
+- `player_name`: The name of the player to check the intoxication level of.

@@ -3,13 +3,17 @@ title: "/breweryx copy"
 hideTitle: true
 ---
 
-import { Command, CommandUsability } from "../../../../../src/components/command";
+import { Command, CommandExecutor } from "../../../../../src/components/command";
 
 <Command
     name="/breweryx copy"
-    syntax="/breweryx copy [quantity]"
-    permission="brewery.cmd.copy"
-    usability={CommandUsability.PLAYER_ONLY}
+    subcommands={[
+        {
+            syntax: "/breweryx copy [quantity]",
+            permission: "brewery.cmd.copy",
+        },
+    ]}
+    executor={CommandExecutor.PLAYER_ONLY}
 />
 
 Copies the brew in your hand.

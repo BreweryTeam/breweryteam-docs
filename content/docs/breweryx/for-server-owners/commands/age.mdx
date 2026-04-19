@@ -3,13 +3,17 @@ title: "/breweryx age"
 hideTitle: true
 ---
 
-import { Command, CommandUsability } from "../../../../../src/components/command";
+import { Command, CommandExecutor } from "../../../../../src/components/command";
 
 <Command
     name="/breweryx age"
-    syntax="/breweryx age barrel_type time"
-    permission="brewery.cmd.create"
-    usability={CommandUsability.PLAYER_ONLY}
+    subcommands={[
+        {
+            syntax: "/breweryx age barrel_type time",
+            permission: "brewery.cmd.create",
+        },
+    ]}
+    executor={CommandExecutor.PLAYER_ONLY}
 />
 
 Instantly ages the brew currently held in your main hand as if it had been sitting inside a barrel.

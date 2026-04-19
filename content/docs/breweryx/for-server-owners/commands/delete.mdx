@@ -1,0 +1,19 @@
+---
+title: "/breweryx delete"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "../../../../../src/components/command";
+
+<Command
+    name="/breweryx delete"
+    subcommands={[
+        {
+            syntax: "/breweryx delete",
+            permission: "brewery.cmd.delete",
+        },
+    ]}
+    executor={CommandExecutor.PLAYER_ONLY}
+/>
+
+Replaces the brew in your hand with air, effectively deleting it. This command will only delete brews in your main hand.

@@ -3,13 +3,17 @@ title: "/breweryx create"
 hideTitle: true
 ---
 
-import { Command, CommandUsability } from "../../../../../src/components/command";
+import { Command, CommandExecutor } from "../../../../../src/components/command";
 
 <Command
     name="/breweryx create"
-    syntax="/breweryx create recipe_name [quality] [player]"
-    permission="brewery.cmd.create"
-    usability={CommandUsability.ANY}
+    subcommands={[
+        {
+            syntax: "/breweryx create recipe_name [quality] [player]",
+            permission: "brewery.cmd.create",
+        },
+    ]}
+    executor={CommandExecutor.ANY}
 />
 
 Creates a new brew based on the specified recipe.
