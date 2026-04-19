@@ -205,7 +205,7 @@ TestBrew:
 | --------- | ------------- | ------------- |
 | Yes       | Number 1 - 10 | None          |
 
-Accuracy needed to get good quality, from `1` to `10`, where `1` is very unaccurate and `10` is very precise.
+Accuracy needed to get good quality, from `1` to `10`, where `1` is very inaccurate and `10` is very precise.
 
 Lower number - easier drink and vica versa.
 
@@ -377,7 +377,7 @@ Level or Duration ranges may be specified with a "-", ex. 'SPEED/1-2/30-40' = lv
 
 Ranges also work high-low, ex. 'POISON/3-1/20-5' for weaker effects at good quality.
 
-Highest possible Duration: 1638 sec. Instant Effects dont need any duration specified.
+Highest possible Duration: 1638 sec. Instant Effects don't need any duration specified.
 
 ```yaml
 TestBrew:
