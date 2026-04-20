@@ -1,0 +1,25 @@
+---
+title: "/breweryx puke"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "../../../../../src/components/command";
+
+<Command
+    name="/breweryx puke"
+    subcommands={[
+        {
+            syntax: "/breweryx puke [player_name] [items]",
+            permission: ["brewery.cmd.puke", "brewery.cmd.pukeOther"],
+        }
+    ]}
+    executor={CommandExecutor.ANY}
+/>
+
+Forces you, or another player to puke as if they had reached a high level of drunkenness.
+
+### Arguments
+
+- `[player_name]`: The name of the player to force to puke. If not specified, forces the executing player to puke.
+  - If the specified player isn't the executing player, the command will check for both the `brewery.cmd.puke` and `brewery.cmd.pukeOther` permissions, and will only execute if the executor has both.
+- `[items]`: The number of items to puke. If not specified, chooses a random number between 20 and 60.

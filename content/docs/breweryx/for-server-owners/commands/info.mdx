@@ -16,7 +16,7 @@ import { Command, CommandExecutor } from "../../../../../src/components/command"
         },
         {
             syntax: "/breweryx info player_name",
-            permission: "brewery.cmd.infoOther",
+            permission: ["brewery.cmd.info", "brewery.cmd.infoOther"],
             headerLink: "#breweryx-info-player_name",
             executor: CommandExecutor.ANY,
         }

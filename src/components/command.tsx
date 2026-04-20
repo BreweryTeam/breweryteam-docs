@@ -7,7 +7,7 @@ export enum CommandExecutor {
 }
 
 export type Command = {
-    permission: string;
+    permission: string | string[];
     syntax: string;
     executor?: CommandExecutor;
     headerLink?: string;
@@ -60,12 +60,18 @@ export function Command(properties: CommandProperties) {
                 }`}
             >
                 {normalizedSubcommands.map((subcommand, index) => (
-                    <a href={subcommand.headerLink} className="contents" key={index}>
+                    <div className="contents" key={index}>
                         <CommandCard title="Syntax">
-                            <div className="min-w-0 font-mono text-sm whitespace-pre-wrap wrap-break-word">{subcommand.syntax}</div>
+                            <a href={subcommand.headerLink}  className="min-w-0 font-mono text-sm whitespace-pre-wrap wrap-break-word">
+                                {subcommand.syntax}
+                            </a>
                         </CommandCard>
                         <CommandCard title="Permission">
-                            <div className="min-w-0 font-mono text-sm wrap-break-word">{subcommand.permission}</div>
+                            <div className="min-w-0 font-mono text-sm wrap-break-word">
+                                {Array.isArray(subcommand.permission)
+                                    ? subcommand.permission.join(", ")
+                                    : subcommand.permission}
+                            </div>
                         </CommandCard>
                         {subcommand.executor && (
                             <CommandCard noGap title="Executor">
@@ -74,7 +80,7 @@ export function Command(properties: CommandProperties) {
                                 </span>
                             </CommandCard>
                         )}
-                    </a>
+                    </div>
                 ))}
             </div>
         </div>
