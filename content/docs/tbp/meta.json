@@ -2,5 +2,5 @@
     "title": "TheBrewingProject",
     "icon": "/assets/img/logo/tbp.png",
     "root": true,
-    "pages": ["...", "gameplay", "for-server-owners"]
+    "pages": ["...", "gameplay", "for-server-owners", "---Other---", "breweryx-vs-tbp"]
 }
