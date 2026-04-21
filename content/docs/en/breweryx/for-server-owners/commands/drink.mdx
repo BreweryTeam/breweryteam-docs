@@ -1,0 +1,25 @@
+---
+title: "/breweryx drink"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx drink"
+    subcommands={[
+        {
+            syntax: "/breweryx drink recipe_name [quality] [player]",
+            permission: "brewery.cmd.drink",
+        },
+    ]}
+    executor={CommandExecutor.ANY}
+/>
+
+Simulates drinking a specified brew.
+
+## Arguments
+
+- `recipe_name`: The name of the recipe.
+- `[quality]`: The quality of the brew. Defaults to excellent.
+- `[player]`: The player to give the brew to. Required if the command is executed by the console.

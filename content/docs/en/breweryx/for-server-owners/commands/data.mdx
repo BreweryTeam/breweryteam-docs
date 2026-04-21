@@ -1,0 +1,50 @@
+---
+title: "/breweryx data"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx data"
+    subcommands={[
+        {
+            syntax: "/breweryx data save",
+            permission: "brewery.cmd.datamanager",
+            headerLink: "#breweryx-data-save"
+        },
+        {
+            syntax: "/breweryx data reload",
+            permission: "brewery.cmd.datamanager",
+            headerLink: "#breweryx-data-reload"
+        },
+    ]}
+    permission="brewery.cmd.datamanager"
+    executor={CommandExecutor.ANY}
+/>
+
+Allows to reload or save BreweryX's data without restarting the server.
+
+## Subcommands
+
+### `/breweryx data save`
+
+Saves all BreweryX data to disk.
+
+### `/breweryx data reload`
+
+Reloads the configs, then reloads all data from disk.
+
+## Remarks
+
+Most server owners won't need this command, but it can be useful for debugging purposes.
+
+Also allows to change data manager backends.
+
+### Migrating data manager backends
+
+Let's say you're on the legacy `FlatFile` backend and want to migrate to the new fancy `SQLite` backend.
+
+You would first change the `storage.type` setting in `config.yml` from `FLATFILE` to `SQLITE`, then run `/breweryx data reload`.
+
+BreweryX would read the config, update the data manager backend, then save all data using the new backend, effectively migrating all your data.
