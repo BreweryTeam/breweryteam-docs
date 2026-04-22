@@ -24,9 +24,7 @@ export default async function Layout({
                 <Banner variant="rainbow">
                     This is a preview of the new documentation, please report any issues you find (well, except TODOs).
                 </Banner>
-                <RootProvider i18n={i18nUI.provider(lang)}>
-                    {children}
-                </RootProvider>
+                <RootProvider i18n={i18nUI.provider(lang)}>{children}</RootProvider>
             </body>
         </html>
     );

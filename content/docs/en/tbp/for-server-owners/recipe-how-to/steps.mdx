@@ -2,6 +2,8 @@
 title: "Recipe Steps"
 ---
 
+import { DynamicLink } from "fumadocs-core/dynamic-link";
+
 ## Introduction
 
 By defining a sequence of steps in a recipe, you will specify how a perfect brew has to be made. The real brewing process does not necessarily need to match exactly with the defined recipe steps.
@@ -35,7 +37,11 @@ An example definition of a cooking step:
 ```
 
 <Callout title="Ingredients">
-    See [Ingredients Basics](../../reference/basics/#ingredients) for more information about the ingredient format
+    See
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#ingredients">
+        Ingredients Basics
+    </DynamicLink>
+    for more information about the ingredient format
 </Callout>
 
 ### Mix step
@@ -52,7 +58,11 @@ An example definition of a mix step:
 ```
 
 <Callout title="Ingredients">
-    See [Ingredients Basics](../../reference/basics/#ingredients) for more information about the ingredient format
+    See{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#ingredients">
+        Ingredients Basics
+    </DynamicLink>{" "}
+    for more information about the ingredient format
 </Callout>
 
 ### Distill step
@@ -77,5 +87,6 @@ An example definition of an age step:
 ```
 
 <Callout title="Barrel Types">
-    More about barrel types can be found in [Aging guide](/docs/for-players/brewing/aging/#barrel-types)
+    More about barrel types can be found in{" "}
+    <DynamicLink href="/[lang]/docs/tbp/gameplay/creating-brews/aging/#barrel-types">Aging guide</DynamicLink>
 </Callout>

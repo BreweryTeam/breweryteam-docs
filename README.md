@@ -9,6 +9,7 @@ This is a Next.js application generated with
 ## Development
 
 First, install dependencies:
+
 ```bash
 npm install
 ```
