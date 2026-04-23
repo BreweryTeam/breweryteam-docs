@@ -1,0 +1,44 @@
+---
+title: "Migrating from BreweryX"
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+
+You can now migrate from BreweryX, this is how it's done:
+
+<Steps>
+
+<Step>
+    Obtain
+    [this](https://ci.breweryteam.dev/job/BreweryTeam/job/TheBrewingProject/job/master/lastBuild/artifact/migration/build/libs/TheBrewingProjectMigration-master.jar)
+    migration plugin file
+</Step>
+
+<Step>Add the migration plugin you downloaded and TheBrewingProject into your `/plugins` folder</Step>
+
+<Step>
+    You can now run your server
+</Step>
+<Step>
+    After the server has started, stop the server and remove both BreweryX and the migration plugin
+</Step>
+</Steps>
+
+### What will be migrated?
+
+- Barrels (any non brews will be erased)
+- Brews inside containers - everytime a player opens a container, TheBrewingProject will check if it contains a BreweryX brew and migrate it if needed. (and no, you don't need the migration plugin for this)
+- Cauldrons with their brew progress and ingredients
+- Everything in the `recipes.yml` file, except for:
+    - Most ingredient defined in `custom-items.yml`
+    - Other brews as ingredients might also break, as the brew display name can no longer be used as a key.
+
+Direct command definitions for recipes are no longer possible in TheBrewingProject, these will automatically be migrated over to event definitions, see `events.yml`
+
+### What will **not** be migrated?
+
+Everything not listed in the above section will not be migrated, this includes:
+
+- `config.yml`
+- `custom-items.yml`
+- `cauldron.yml`

@@ -1,0 +1,47 @@
+---
+title: "Events and sending messages"
+---
+
+import { DynamicLink } from "fumadocs-core/dynamic-link";
+
+## Event
+
+You can initiate an <DynamicLink href="/[lang]/docs/tbp/for-server-owners/config/events/">event</DynamicLink> whenever the brew is consumed like this:
+
+```yml
+my_brew:
+  ...
+  events:
+    - +stumble
+    - ++gsit:sit
+    - +++my_custom_event
+    - tunnel_vision
+```
+
+<Callout title="Quality factored list">
+    See{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">
+        Quality Factored List
+    </DynamicLink>{" "}
+    for more information
+</Callout>
+
+## Sending messages
+
+You can specify some messages to send **to** the player. They are specified using the [MiniMessage](https://docs.advntr.dev/minimessage/format) format
+
+```yml
+my_brew:
+   ...
+   messages.action-bar: This message will show up on player action bar
+   messages.title: This message will show up on player title
+   messages.message: This message will show up in player chat
+```
+
+<Callout title="Quality factored value">
+    See{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
+        Quality Factored Value
+    </DynamicLink>{" "}
+    for more information. If you want to have multiple lines, use the `br` or `newline` MiniMessage tag{" "}
+</Callout>

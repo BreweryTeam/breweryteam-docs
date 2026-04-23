@@ -1,0 +1,23 @@
+---
+title: "/breweryx help"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx help"
+    subcommands={[
+        {
+            syntax: "/breweryx help [page]",
+            permission: "none",
+        },
+    ]}
+    executor={CommandExecutor.ANY}
+/>
+
+Выводит список команд BreweryX и их назначение.
+
+## Аргументы
+
+- `[page]`: Номер страницы. Дефолтно - 1.

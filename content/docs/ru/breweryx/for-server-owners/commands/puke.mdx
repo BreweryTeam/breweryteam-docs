@@ -1,0 +1,25 @@
+---
+title: "/breweryx puke"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx puke"
+    subcommands={[
+        {
+            syntax: "/breweryx puke [player_name] [items]",
+            permission: ["brewery.cmd.puke", "brewery.cmd.pukeOther"],
+        },
+    ]}
+    executor={CommandExecutor.ANY}
+/>
+
+Заставляет вас (или игрока) блевать как при высоком опьянении.
+
+### Аргументы
+
+- `[player_name]`: Никнейм рыгающего игрока. Если не указан, то применяется к исполнителю.
+    - Если указанный игрок не исполнитель команды, команда будет применена лишь если у исполнителя есть права `brewery.cmd.puke` и `brewery.cmd.pukeOther`
+- `[items]`: Сколько единиц блевоты вырыгнуть. Если не указано, будет выбрано случайное значение между 20 и 60.

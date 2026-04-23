@@ -1,98 +1,99 @@
 ---
-title: "Default Recipes"
+title: "Базовые рецепты"
 icon: CookingPot
 ---
 
-<Callout title="Important" type="warn">
-    Note that server administrators can add, change, and remove recipes, so those recipes might not be present on every
-    server.
+<Callout title="Важно!" type="warn">
+    Администраторы серверов могут добавлять, менять и удалять рецепты, поэтому рецепты с этой страницы могут быть далеко не на каждом сервере.
 </Callout>
 
 ```yaml title="recipes.yml"
-# !!! IMPORTANT: BreweryX configuration files do NOT support external comments! If you add any comments, they will be overwritten !!!
-# -- Recipes for Potions --
+# !!! ВАЖНО: Конфиг BreweryX НЕ поддерживает внешние комментарии!
+# Если вы добавите собственные комментарии в файл, то они автоматически будут перезаписаны !!!
+# -- Рецепты напитков --
 
-# enabled: true if the recipe should be enabled, false if it should be disabled
+# enabled: Включен ли рецепт или нет (true/false)
 
-# name: Different names for bad/normal/good (Formatting codes possible: such as &6 or hex as &#123123)
-#   name: "Worst drink/Good Drink/Best drink i had in my entire life!"
+# name: Названия для плохого/нормального/хорошего качества (Доступно форматирование, например &6 или hex-коды &#123123) 
+#   name: "Плохое пиво/Нормальное пиво/Отличное пиво, вот оно жидкое золото!"
 
-# ingredients: List of 'material/amount'
-#   With an item in your hand, use /brew ItemName to get its material for use in a recipe
-#   A list of materials can be found here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
-#   Plugin items with 'plugin:id' (Currently supporting Brewery, Garden (BreweryX Garden Addon), Oraxen, ItemsAdder, Nexo, Slimefun)
-#   Example: '- itemsadder:grape/5'
-#   Custom items from 'custom-items.yml' do not require any prefixes ('- example_custom_item/10')
-#   You can also use drinks as ingredients for other drinks. Correct format for this would be: 'brewery:ID/amount'
-#   Example: '- brewery:wheatbeer/1'
+# ingredients: Список ингредиентов в формате 'материал/количество'
+#   Можно использовать /brew ItemName с предметом в руке, чтобы узнать его "материал" для конфига (как правило, это id предмета)
+#   Список материалов можно также найти тут: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+#   Плагинские материалы указываются форматом 'plugin:id/количество' (Поддерживаются: Brewery (другой напиток как ингредиент), Garden (BreweryX Garden Addon), Oraxen, ItemsAdder, Nexo, Slimefun)
+#   Например: '- itemsadder:grape/5'
+#   Кастом-айтемы из 'custom-items.yml' не требуют никаких префиксов ('- example_custom_item/10')
+#   Можно также использовать напитки как ингредиенты к другим напиткам. Правильный формат: 'brewery:ID/количество'
+#   Пример: '- brewery:wheatbeer/1'
 
-# cookingtime: Time in real minutes ingredients have to boil
+# cookingtime: Время (в минутах), на протяжении которого ингредиенты должны вариться
 
-# distillruns: How often it has to be distilled for full alcohol (0=without distilling)
+# distillruns: Сколько раз нужно продистиллировать для полного содержания алкоголя (0 = не требует дистилляции. Но можно также просто не добавлять этот параметр)
 
-# distilltime: How long (in seconds) one distill-run takes (0=Default time of 40 sec) MC Default would be 20 sec
+# distilltime: Сколько (в секундах) занимает один круг дистилляции (дефолтное время в плагине = 40 сек, дефолтное время ванильных зелий в зельеварке = 20)
 
-# wood: Wood of the barrel:
-#   Can be a string, a number (see conversion below), or a list of wood types.
+# wood: Тип дерева у бочки:
+#   Может быть буквенным значением, номером (см. ниже), или списком из видов дерева
 #   0=any 1=Birch 2=Oak 3=Jungle 4=Spruce
 #   5=Acacia 6=Dark Oak 7=Crimson 8=Warped
 #   9=Mangrove 10=Cherry 11=Bamboo 12=Cut Copper 13=Pale Oak
-#     you can also use id or name, instead of number:
+#     Вместо номера можно использовать имя или id:
 #     wood: 13
 #     wood: pale_oak
 #     wood: Pale Oak
-#   Vanilla Minecraft barrel is considered oak
+#   Ванильная бочка из игры считается за дубовую
 
-# age: Time, in "years", the potion has to age in a barrel 0=no aging
+# age: Время в "годах", которое напиток должен настаиваться в бочке. 0 = рецепт без настаивания (или просто не добавляйте wood и age в рецепт)
 
-# color: Color of the potion after distilling/aging.
-#   Usable Colors: DARK_RED, RED, BRIGHT_RED, ORANGE, YELLOW, PINK, PURPLE, BLUE, CYAN, WATER, TEAL, OLIVE, GREEN, LIME, BLACK, GREY, BRIGHT_GREY, WHITE
-#   Or RGB colors (color: 99FF33) (search for "HTML color" on the internet)
+# color: Цвет готового напитка.
+#   Встроенные цвета: DARK_RED, RED, BRIGHT_RED, ORANGE, YELLOW, PINK, PURPLE, BLUE, CYAN, WATER, TEAL, OLIVE, GREEN, LIME, BLACK, GREY, BRIGHT_GREY, WHITE
+#   Либо HEX-цвета (color: 99FF33) (гуглите "HTML color picker")
 
-# difficulty: 1-10 accuracy needed to get good quality (1 = unaccurate/easy, 10 = very precise/hard)
+# difficulty: Сложность (1-10) рецепта напитка. Чем выше число - тем более точно нужно следовать рецепту для получения идеального качества.
 
-# alcohol: Absolute amount of alcohol 0-100 in a perfect potion (will be added directly to the player, where 100 means fainting)
+# alcohol: Процент опьянения (до 100), добавляемый игроку при выпивании идеально приготовленного напитка. Может быть отрицательным.
 
-# lore: List of additional text on the finished brew. (Formatting codes possible: such as &6)
-#   Specific lore for quality possible, using + bad, ++ normal, +++ good, added to the front of the line.
-#   - +++ This is the best drink!
-#   - ++ This is decent drink.
-#   - + This is the worst drink
+# lore: Дополнительное описание у напитка в инвентаре. Поддерживает цветовое форматирование, см. "name:" выше.
+#   Строки описания можно сделать отображаемыми при определенном уровне качества напитка, добавив + для плохого, ++ для среднего, или +++ для хорошего, перед началом текста:
+#   - +++ Это хороший напиток!
+#   - ++ Это среднячок.
+#   - + БояринЪ меня...
+#   - А эта строка будет показываться при любом качестве!
 
-# servercommands: List of Commands executed by the -Server- when drinking the brew (Can use %player_name%  %quality%)
-#   Specific Commands for quality possible, using + bad, ++ normal, +++ good, added to the front of the line.
+# servercommands: Список команд, выполняемых от лица сервера при выпивании (плейсхолдеры %player_name%  %quality%)
+#   Можно сделать их выполнение зависящим от качества напитка при помощи плюсов (см. lore выше): 
 #   - +++ op %player_name%
 #   - ++ money give %player_name% 10
 #   - + kill %player_name%
-#   Command execution can be delayed by adding "/ <amount>s" to the end, like this:
+#   Команду можно сделать отложенной по времени, добавив "/ <amount>s" в конце:
 #   - op Jsinco / 3s
 
-# playercommands: List of Commands executed by the -Player- when drinking the brew (Can use %player_name%  %quality%)
-#   Specific Commands for quality possible, using + bad, ++ normal, +++ good, added to the front of the line.
+# playercommands: Список команд, выполняемых от лица выпившего игрока при выпивании (плейсхолдеры %player_name%  %quality%)
+#   Можно сделать их выполнение зависящим от качества напитка при помощи плюсов (см. lore выше): 
 #   - +++ spawn
 #   - ++ home
 #   - + suicide
-#   Command execution can be delayed by adding "/ <amount>s" to the end, like this:
+#   Команду можно сделать отложенной по времени, добавив "/ <amount>s" в конце:
 #   - op Jsinco / 3s
 
-# drinkmessage: Chat-message to the Player when drinking the Brew
+# drinkmessage: Сообщение в чате, возникающее при выпивании
 
-# drinktitle: Title on Screen to the Player when drinking the Brew
+# drinktitle: Надпись на экране, возникающая при выпивании
 
-# glint: Boolean if the item should have a glint (enchant glint)
+# glint: true/false - должна ли модель напитка переливаться, как у зачарованного предмета
 
-# customModelData: Custom Model Data Tag. This is a number that can be used to add custom textures to the item.
-#   Can specify one for all, or one for each quality, separated by /
+# customModelData: Custom Model Data тэг. Может использоваться для добавления кастомных текстур предмету.
+#   Можно задать сразу 3, для плохого/среднего/хорошего качества, разделяя номера через "/"
 #   customModelData: 1
 #   customModelData: 1/2/3
 
-# effects: List of effect/level/duration  Special potion-effect when drinking, duration in seconds.
-#   Possible Effects: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html
-#   Level or Duration ranges may be specified with a "-", ex. 'SPEED/1-2/30-40' = lvl 1 and 30 sec at worst and lvl 2 and 40 sec at best
-#   Ranges also work high-low, ex. 'POISON/3-1/20-5' for weaker effects at good quality.
-#   Highest possible Duration: 1638 sec. Instant Effects dont need any duration specified.
+# effects: Эффекты при выпивании в формате "эффект/уровень/длительность(сек)"
+#   Существующие эффекты: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html
+#   Разброс качества и/или длительности в зависимости от кач-ва можно задать при помощи "-", Например: 'SPEED/1-2/30-40' = lvl 1 скорость на 30сек при худшем качестве и lvl 2 скорость на 40сек при лучшем.
+#   В обратную сторону это тоже работает: 'POISON/3-1/20-5' - отравление будет слабее при улучшении качества.
+#   Максимальная длительность: 1638 сек. Мгновенным эффектам (лечение, урон, ...)указывать длительность необязательно.
 
-# 'ex' showcases every available option for a recipe:
+# 'ex' - это пример со всеми возможными аргументами:
 recipes:
     ex:
         enabled: true

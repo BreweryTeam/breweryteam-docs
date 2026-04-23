@@ -1,0 +1,19 @@
+---
+title: "/breweryx itemName"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx itemName"
+    subcommands={[
+        {
+            syntax: "/breweryx itemName",
+            permission: "brewery.cmd.itemname",
+        },
+    ]}
+    executor={CommandExecutor.PLAYER_ONLY}
+/>
+
+Выводит название материала для предмета в руке (например, Дёрн будет `grass_block`)

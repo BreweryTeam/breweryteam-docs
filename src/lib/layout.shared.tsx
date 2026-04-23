@@ -8,22 +8,22 @@ export const i18nUI = defineI18nUI(i18n, {
         displayName: "English",
     },
     ru: {
-        displayName: "Russian",
-        chooseLanguage: "TRANSLATE ME VUTKA",
-        chooseTheme: "TRANSLATE ME VUTKA",
-        editOnGithub: "TRANSLATE ME VUTKA",
-        lastUpdate: "TRANSLATE ME VUTKA",
-        nextPage: "TRANSLATE ME VUTKA",
-        previousPage: "TRANSLATE ME VUTKA",
-        search: "TRANSLATE ME VUTKA",
-        toc: "TRANSLATE ME VUTKA",
-        tocNoHeadings: "TRANSLATE ME VUTKA",
+        displayName: "Русский",
+        chooseLanguage: "Выберите язык",
+        chooseTheme: "Выберите тему",
+        editOnGithub: "Отредактировать на GitHub",
+        lastUpdate: "Последнее изменение",
+        nextPage: "Следующая страница",
+        previousPage: "Предыдущая страница",
+        search: "Поиск",
+        toc: "На этой странице",
+        tocNoHeadings: "Нет заголовков",
     },
 });
 
 const appNameByLang: Record<string, string> = {
     en: "Brewery Team Docs",
-    ru: "TRANSLATE ME VUTKA",
+    ru: "Документация Brewery Team",
 };
 
 export function baseOptions(lang: string): BaseLayoutProps {

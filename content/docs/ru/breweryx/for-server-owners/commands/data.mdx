@@ -1,0 +1,50 @@
+---
+title: "/breweryx data"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx data"
+    subcommands={[
+        {
+            syntax: "/breweryx data save",
+            permission: "brewery.cmd.datamanager",
+            headerLink: "#breweryx-data-save",
+        },
+        {
+            syntax: "/breweryx data reload",
+            permission: "brewery.cmd.datamanager",
+            headerLink: "#breweryx-data-reload",
+        },
+    ]}
+    permission="brewery.cmd.datamanager"
+    executor={CommandExecutor.ANY}
+/>
+
+Позволяет перезагрузить или сохранить данные плагина без перезагрузки сервера (или плагина).
+
+## Подкоманды
+
+### `/breweryx data save`
+
+Сохраняет все данные BreweryX (бочки, котлы и тд)
+
+### `/breweryx data reload`
+
+Перезагружает вначале конфиги, а затем все данные плагина.
+
+## Заметка
+
+Большинству серверов эта команда не понадобится, однако она может быть полезна во время отладки.
+
+Она также позволяет сменить способ хранения данных.
+
+### Меняем способ хранения данных
+
+Предположим, что вы используете устаревший `FlatFile` способ хранения и хотите перейти на `SQLite` датабазу.
+
+Для начала нам нужно поменять настройку `storage.type` в файле `config.yml` с `FLATFILE` на `SQLITE`, сохранить изменения и прописать `/breweryx data reload`.
+
+BreweryX прочитает конфиг, изменит способ хранения данных, а затем сохранит их в новом формате.

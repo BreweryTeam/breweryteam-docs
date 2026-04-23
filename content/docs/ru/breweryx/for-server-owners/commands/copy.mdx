@@ -1,0 +1,23 @@
+---
+title: "/breweryx copy"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx copy"
+    subcommands={[
+        {
+            syntax: "/breweryx copy [quantity]",
+            permission: "brewery.cmd.copy",
+        },
+    ]}
+    executor={CommandExecutor.PLAYER_ONLY}
+/>
+
+Копирует напиток в вашей руке.
+
+## Аргументы
+
+- `[quantity]`: Сколько копий создать. Если не указано, то создаёт одну.
