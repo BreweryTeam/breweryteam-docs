@@ -1,12 +1,12 @@
 ---
-title: "Events"
+title: "События"
 ---
 
-This is a system for executing commands, applying potion effects, sending messages, and applying other events. All events configuration can be found in `events.yml`
+События - это система для выполнения комманд, применения эффектов, отправки сообщений, и применения других событий. Вся конфигурация событий находится в `events.yml`
 
 ## Random drunken events
 
-Which events should happen randomly whenever a player gets drunk enough, or has enough toxins.
+События, происходящие случайно, пока у игрока достаточно опьянения и/или токсинов.
 
 ```yml
 enabled-random-events:
@@ -20,7 +20,7 @@ enabled-random-events:
 
 ## Pass out time
 
-How many minutes the player should be passed out whenever the `pass_out` event gets triggered.
+Сколько минут игрок должен находиться в отрубе во время события `pass_out`
 
 ```yml
 pass-out-time: 5
@@ -28,7 +28,7 @@ pass-out-time: 5
 
 ## Teleport destinations
 
-Where should the player teleport to to (chosen randomly) whenever the teleport event gets triggered.
+Куда игрок должен быть телепортирован (выбирается рандомно, если несколько) во время события с телепортацией
 
 ```yml
 teleport-destinations:
@@ -37,7 +37,7 @@ teleport-destinations:
 
 ## Drunken messages
 
-What messages should be sent from the player whenever the drunk_message event triggers.
+Какие сообщения должны отправляться от имени игрока во время события drunk_message.
 
 ```yml
 messages:
@@ -48,14 +48,13 @@ messages:
     - I'm not drunk. You're drunk.
 ```
 
-<Callout title="Keep this setting disabled">
-    It can get very annoying to have repeating messages sent out to chat like this, keep this away from random drunken
-    events
+<Callout title="Лучше держите выключенным">
+    Может очень раздражать иметь в чате вот такой спам повторяющимися сообщениями, лучше держите это подальше от случайных пьяных событий.
 </Callout>
 
-## Custom events
+## Кастомные события
 
-This is how you define your own custom event
+Вот как добавлять свои собственные события
 
 ```yml
 custom-events:
@@ -69,31 +68,31 @@ custom-events:
                   toxins: -15
 ```
 
-TBP's custom event system is meant to allow more flexible definitions of events. You can with custom events define commands to execute, effects to play, and more. It's almost as if it's a programming language of itself!
+Система кастомных событий tbp крайне гибка и может использоваться для очень многих вещей. При помощи кастомных событий можно выполнять команды, проигрывать эффекты, и делать почти всё что угодно. Почти как отдельный язык программирования!
 
-The most rudimentary concept for custom events is that the order which the event step is going to play defined as such:
+Наиболее простой вариант пользовательских событий - это просто линейный порядок выполнения нескольких шагов события:
 
 ```yml
-- This runs first
-- This runs after
-- This runs last
+- Сначала этот шаг
+- Потом этот
+- А этот позже всех
 ```
 
-We will now go through all the properties you can define in each step.
+Разберём все возможные параметры для шагов.
 
 ### `named-event`
 
-Run a predefined event.
+Запустить предопределённое событие (некоторые из них мы разбирали в начале этой страницы).
 
-Can have the values `puke`, `pass_out`, `stumble`, `chicken`, `teleport`, `drunk_message`, `nausea`, `fever`, `hallucination`, `kaboom`. List might expand.
+Возможные значения: `puke`, `pass_out`, `stumble`, `chicken`, `teleport`, `drunk_message`, `nausea`, `fever`, `hallucination`, `kaboom`. Список может пополняться.
 
 ### `wait-duration`
 
-Wait the specified duration until continuing to the next step, example duration is `10s 10t`, wait 10 seconds and 10 ticks.
+Подождать какое-то время перед переходом к следующему шагу, `10s 10t` - подождать 10 секунд и 10 тиков.
 
 ### `wait-condition`
 
-Wait for condition until this step triggers. Here's how you define each condition:
+Ждать выполнения определённого условия, прежде чем текущий шаг запустится. Вот как задаётся каждое условие:
 
 ```yml
 steps:
@@ -106,7 +105,7 @@ steps:
 
 ### `if-condition`
 
-Continue if condition is met, otherwise stop event. Here's how you define each if condition:
+Продолжать лишь при соблюдении условия, в противном случае прервать выполнение события. Вот как задаётся if-условие:
 
 ```yml
 steps:
@@ -120,7 +119,7 @@ steps:
           joined-world: my-world-name
 ```
 
-You can also invert a condition with the `not` keyword, like this:
+Вы также можете интвертировать условие, добавив `not`:
 
 ```yml
 steps:
@@ -131,7 +130,7 @@ steps:
 
 ### `consume`
 
-Consume the specified modifiers, an example is
+Изменить указанные модификаторы. Пример:
 
 ```yml
 steps:
@@ -142,11 +141,11 @@ steps:
 
 ### `event`
 
-Define another event with an event property (can be custom or predefined)
+Задать другое событие с помощью параметра (может быть как кастомным так и предопределенным)
 
 ### `effect`
 
-Apply an effect to the player. Requires effect, amplifier, and duration property. An example is:
+Наложить эффект на игрока. Требуется указать эффект, усиление и длительность. Пример:
 
 ```yml
 steps:
@@ -155,43 +154,43 @@ steps:
       duration: 20;100
 ```
 
-Apply a poison effect on a player with a random amplifier within the range 1-2 and duration within the range 20-100
+Наложит на игрока отравление со случайным усилением 1-2 (**т.е. уровнем 2-3**) и длительностью 20-100
 
 ### `command`
 
-Execute a command. Requires the command property, command executor can be defined with the `as` property
+Выполнить команду. Требуется указать саму команду. Исполнителя можно указать с помощью параметра `as`
 
 ```yml
 steps:
     - command: ping
-      as: player # Execute with the players permissions
+      as: player # Выполнить с разрешениями игрока
     - command: pong
-      as: server # Execute with console permissions
+      as: server # Выполнить с разрешениями консоли
 ```
 
 ### `location`
 
-Set the location for the player (teleport). An example:
+Установить позицию для телепортации игрока. Пример:
 
 ```yml
 steps:
     - location: worldname 1 2 3
 ```
 
-Teleport the player to the world `worldname` to position x=1, y=2, z=3
+Телепортирует игрока в мир `worldname` на координаты x=1, y=2, z=3
 
 ### `integration-event`
 
-Trigger an event from an integration
+Запустить событие из интеграции
 
 ```yml
 steps:
     - integration-event: gsit:sit
 ```
 
-## An example
+## Пример события
 
-The following custom event definition defines an event with a probability and ranges. This makes it usable in [enabled-random-events](./#random-drunken-events) section.
+Данный пример описывает событие с указанием шансов и разбросов. Благодаря этому, данное событие можно использовать в разделе [enabled-random-events](./events#random-drunken-events) в файле.
 
 ```yml
 repeating_drunken_walk:
@@ -212,11 +211,11 @@ repeating_drunken_walk:
         - event: repeating_drunken_walk
 ```
 
-The steps are as follows:
+Получается следующее:
 
-1. Run the drunken walk predefined event
-2. Wait for 20 seconds and one tick
-3. Continue to the next step if alcohol level is above 60, otherwise exit
-4. Go back to step 1, run this event again
+1. Запустить предустановленное событие drunken walk
+2. Ждать 20 секунд и 1 тик
+3. Перейти к следующему шагу, если количество опьянения выше 60, в противном случае отмена.
+4. Вернуться к шагу 1, т.е. запустить это событие заново.
 
-This would give you infinite drunken walk, as long as your alcohol level is above 60
+На выходе получаем бесконечную пьяную походку, пока ваш уровень опьянения выше 60.

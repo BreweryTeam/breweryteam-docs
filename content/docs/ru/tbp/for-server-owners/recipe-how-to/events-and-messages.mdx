@@ -1,12 +1,12 @@
 ---
-title: "Events and sending messages"
+title: "События и сообщения"
 ---
 
 import { DynamicLink } from "fumadocs-core/dynamic-link";
 
-## Event
+## События
 
-You can initiate an <DynamicLink href="/[lang]/docs/tbp/for-server-owners/config/events/">event</DynamicLink> whenever the brew is consumed like this:
+Вы можете назначать напиткам <DynamicLink href="/[lang]/docs/tbp/for-server-owners/config/events/">события</DynamicLink>, выполняемые при выпивании:
 
 ```yml
 my_brew:
@@ -18,30 +18,30 @@ my_brew:
     - tunnel_vision
 ```
 
-<Callout title="Quality factored list">
-    See{" "}
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
     <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">
         Quality Factored List
     </DynamicLink>{" "}
-    for more information
+    для большей информации
 </Callout>
 
-## Sending messages
+## Отправка сообщений
 
-You can specify some messages to send **to** the player. They are specified using the [MiniMessage](https://docs.advntr.dev/minimessage/format) format
+Вы можете настроить показ сообщений игроку при выпивании напитка. Они используют специальное форматирование [MiniMessage](https://docs.advntr.dev/minimessage/format), так что привычные "&" цветовые коды работать не будут! Смотрите ссылку.
 
 ```yml
 my_brew:
    ...
-   messages.action-bar: This message will show up on player action bar
-   messages.title: This message will show up on player title
-   messages.message: This message will show up in player chat
+   messages.action-bar: Это сообщение будет показано в акшн-баре (над полоской опыта)
+   messages.title: Это сообщение будет показано на экране
+   messages.message: А это будет показано в чате.
 ```
 
-<Callout title="Quality factored value">
-    See{" "}
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
     <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
         Quality Factored Value
     </DynamicLink>{" "}
-    for more information. If you want to have multiple lines, use the `br` or `newline` MiniMessage tag{" "}
+    для большей информации. Если вы хотите сделать несколько линий текста, то используйте MiniMessage-тег `br` или `newline`{" "}
 </Callout>

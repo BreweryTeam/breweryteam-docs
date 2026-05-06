@@ -1,31 +1,31 @@
 ---
-title: "Recipe Steps"
+title: "Шаги приготовления"
 ---
 
 import { DynamicLink } from "fumadocs-core/dynamic-link";
 
-## Introduction
+## Вступление
 
-By defining a sequence of steps in a recipe, you will specify how a perfect brew has to be made. The real brewing process does not necessarily need to match exactly with the defined recipe steps.
+Указывая шаги при настройке рецепта, вы указываете их для идеального напитка. Реальный процесс приготовления необязательно должен 100%-но соответствовать всем указанным шагам, но качество пострадает.
 
-There are 4 different steps that are currently supported by TheBrewingProject:
+На данный момент в TheBrewingProject существует 4 возможных вида шагов:
 
-| Step Type  | ID        |
-| ---------- | --------- |
-| Cooking    | `cook`    |
-| Mixing     | `mix`     |
-| Distilling | `distill` |
-| Aging      | `age`     |
+| Вид шага         | ID        |
+| ----------       | --------- |
+| Варка            | `cook`    |
+| Смешивание       | `mix`     |
+| Дистилляция      | `distill` |
+| Выдержка (бочка) | `age`     |
 
-<Callout title="Initial Step">Cooking and mixing always have to be the first step of any brewing process!</Callout>
+<Callout title="Первоначальные шаги">Рецепт приготовления напитка всегда должен начинаться с варки или/и смешивания!</Callout>
 
-## Step Format
+## Формат шагов
 
-Each type of step has a unique format
+Каждый вид шагов использует собственный формат.
 
-### Cooking step
+### Готовка
 
-An example definition of a cooking step:
+Пример готовки:
 
 ```yml
 - type: cook
@@ -36,17 +36,17 @@ An example definition of a cooking step:
       - my_plugin_name:sugar/64
 ```
 
-<Callout title="Ingredients">
-    See
+<Callout title="Нужно указать ингредиенты">
+    Смотрите
     <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#ingredients">
         Ingredients Basics
     </DynamicLink>
-    for more information about the ingredient format
+    для большей информации об ингредиентах
 </Callout>
 
-### Mix step
+### Смешивание
 
-An example definition of a mix step:
+Пример смешивания:
 
 ```yml
 - type: mix
@@ -57,28 +57,28 @@ An example definition of a mix step:
       - sugar/2
 ```
 
-<Callout title="Ingredients">
-    See{" "}
+<Callout title="Нужно указать ингредиенты">
+    Смотрите
     <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#ingredients">
         Ingredients Basics
-    </DynamicLink>{" "}
-    for more information about the ingredient format
+    </DynamicLink>
+    для большей информации об ингредиентах
 </Callout>
 
-### Distill step
+### Дистилляция
 
-An example definition of a distill step:
+Пример дистилляции:
 
 ```yml
 - type: distill
   runs: 3
 ```
 
-Runs means that a brew would need to be distilled a specific amount of times to get a perfect result.
+Runs означает количество раз, которое требуется продистиллировать напиток для получения идеала.
 
-### Age step
+### Выдержка
 
-An example definition of an age step:
+Пример выдержки:
 
 ```yml
 - type: age
@@ -86,7 +86,7 @@ An example definition of an age step:
   barrel-type: any
 ```
 
-<Callout title="Barrel Types">
-    More about barrel types can be found in{" "}
-    <DynamicLink href="/[lang]/docs/tbp/gameplay/creating-brews/aging/#barrel-types">Aging guide</DynamicLink>
+<Callout title="Виды бочек">
+    Больше информации о видах бочек можно найти{" "}
+    <DynamicLink href="/[lang]/docs/tbp/gameplay/creating-brews/aging/#barrel-types">здесь</DynamicLink>
 </Callout>

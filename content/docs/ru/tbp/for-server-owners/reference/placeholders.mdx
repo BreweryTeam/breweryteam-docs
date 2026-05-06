@@ -1,23 +1,23 @@
 ---
-title: "Placeholders"
+title: "Плейсхолдеры"
 ---
 
-TheBrewingProject supports both [PlaceholderAPI](https://github.com/PlaceholderAPI/PlaceholderAPI) and [MiniPlaceholders](https://modrinth.com/plugin/miniplaceholders) for displaying information.
+TheBrewingProject поддерживает как [PlaceholderAPI](https://github.com/PlaceholderAPI/PlaceholderAPI), так и [MiniPlaceholders](https://modrinth.com/plugin/miniplaceholders) отображения информации.
 
-Please note that some plugins don't support plugins support PlaceholderAPI, or MiniPlaceholders.  
-To reliably check if a placeholder works, you can use the following commands:
+Обратите внимание, что некоторые плагины не поддерживают PAPI или MiniPlaceholders.  
+Чтобы проверить наверняка, работает ли плейсхолдер, используйте следующую команду:
 
 ```yaml
-# For PlaceholderAPI
+# Для PlaceholderAPI
 /placeholderapi parse PLAYER PLACEHOLDER
 
-# For MiniPlaceholders
+# Для MiniPlaceholders
 /miniplaceholders parse PLAYER PLACEHOLDER
 ```
 
-## Player Placeholders
+## Плейсхолдеры игрока
 
-| PlaceholderAPI     | MiniPlaceholders   | Description                                                                           |
+| PlaceholderAPI     | MiniPlaceholders   | Описание                                                                              |
 | ------------------ | ------------------ | ------------------------------------------------------------------------------------- |
-| `%tbp_[modifier]%` | `<tbp_[modifier]>` | Returns the value of a modifier from the player's state. For example `%tbp_alcohol%`. |
-| `%tbp_next_event%` | `<tbp_next_event>` | Name of the next event that will happen when the player is drunk.                     |
+| `%tbp_[modifier]%` | `<tbp_[modifier]>` | Выводит текущее значение модификатора у конкретного игрока, например `%tbp_alcohol%`. |
+| `%tbp_next_event%` | `<tbp_next_event>` | Название следующего события, которое произойдет у пьяного игрока.                     |

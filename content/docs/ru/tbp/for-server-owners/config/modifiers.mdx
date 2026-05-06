@@ -1,85 +1,87 @@
 ---
-title: "Modifiers"
+title: "Модификаторы"
 ---
 
-`modifiers.yml` is where you define what statuses a player can have. A modifier can depend on other modifiers, and can also change when the player consumes something. it usually has a decrement time.
+Файл `modifiers.yml` содержит в себе информацию о модификаторах. Модификаторы - это "статусы", которые могут присутствовать у игрока. Самый простой пример - alcohol и toxins. Модификаторы могут зависеть от других модификаторов или, например, изменяться при употреблении чего-либо. Обычно у них присутствует время их спада.
 
 ### Drunken modifiers
 
-Here's a short description on each modifier property
+Вот краткое описание каждого параметра модификатора
 
 #### `name`
 
-is the unique name to identify this modifier everywhere else, note that there are possibilities of name conflicts with other configuration keys and you should keep the name alphanumeric including underscores. For example `hello_my_modifier` is valid, but `jag+känner+en+bot` would be invalid as `ä` and `+` is not alhpanumeric
+Уникальное имя, дающееся модификатору, чтобы определять его среди остальных. Во избежание конфликтов убедитесь, что оно не содержит ничего кроме `a-z`, `0-9` и `_`, а также не идентично каким-либо другим значениям конфигурации из других файлов.
 
 #### `min-value, max-value`
 
-This is how you define the range wherein the modifier is allowed to be, a normal min value would be 0, and a normal max value would be 100
+Пределы, в рамках которых может быть значение модификатора. Например, от 0 до 100
 
 #### `decrement-time`
 
-You can define the decrement time for this modifier, a decrement time of 400 means that the modifier decreases 1 value every 400 ticks (20 seconds). An more complicated example would be:
+Время спада модификатора. Например, 400 означало бы, что значение модификатора пассивно уменьшается на 1 каждые 400 тиков (20 секунд). Больше - модификатор спадает медленнее. Меньше - быстрее. Кстати, допустимо также что-то подобное:
 
 ```yml
 decrement-time: "0.2 * sin(my_other_modifier)"
 ```
 
-See the [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) for more information about what functions are available for any expression
+См. [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) для большей информации о том, что еще доступно.
 
 #### `increment-dependency`
 
-Define how the modifier should change when a modifier is consumed for the player. An example:
+Позволяет указать, как этот модификатор изменяется при изменении другого модификатора у игрока. Например:
 
 ```yml
 increment-dependency: consumed_other_modifier * (110 - different_modifier) / 110
 ```
 
-A modifier prefixed with `consumed_`, is going to be the modifier change specified in the event. See the [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) for more information about what functions are available for any expression
+Модификатор с префиксом `consumed_`, будет указанным в событии изменением модификатора. См. [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) для большей информации о том, что еще доступно.
 
 #### `display-name`
 
-Define the name of the modifier, it will be shown in commands
+Определяет имя модификатора, которое будет отображаться в командах.
 
 ### Drunken displays
 
-A drunken display will show for the player whenever a modifier changes, if no drunken display has been defined for the modifier, none will show.
+Drunken display отображается игроку, когда модификатор изменяется. Если drunken display для данного модификатора не указан, то отображаться не будет. Параметры:
 
 #### `message`
 
-Define the message to show whenever this modifier changes, it includes 3 custom tags, skull, bars, stars that you can use to display amount.
+Выводит сообщение, показывающееся при изменении модификатора. Включает в себя 3 кастомных тега, черепушки, палочки и звёзды, которые вы можете использовать для отображения значения.
 
 #### `filter`
 
-Define an expression to filter out when to display the message, the display will only show when the expression is larger than 0. See the [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) for more information about what functions are available for any expression
+Позволяет задать выражение для определения случаев, когда показывать сообщение. Display покажется лишь в случае, если значение выражения равняется больше, чем 0. См. [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) для большей информации о том, что еще доступно.
 
 #### `display-value`
 
-The value that should be displayed to the user, this has to be normalized betwen 0 and 100 for the 3 different tags that can show the value. See the [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) for more information about what functions are available for any expression
+Значение, которое будет отображаться пользователю. Должно быть нормализованным между 0 и 100 для 3 тегов, показывающих значение. См. [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) для большей информации о том, что еще доступно.
 
 #### `display-window`
 
-Define where to display this message, can be chat, action_bar, title
+Позволяет указать, где именно отображать сообщение. Возможны chat, action_bar, title
 
 ### Drunken tooltips
 
-Define how a modifier should be shown in a tooltip for all brew items
+Позволяет указать, как отображать этот модификатор в описаниях напитков
 
 #### `filter`
 
-Define an expression to filter out when add the tooltip to the brew, the tooltip will be added when the expression is larger than 0. See the [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) for more information about what functions are available for any expression
+Позволяет задать выражение для определения случаев, когда показывать модификатор в описаниях напитков. Будет отображаться лишь в случае, если значение выражения равняется больше, чем 0. См. [exp4j library](https://www.objecthunter.net/exp4j/#Built-in_functions) для большей информации о том, что еще доступно.
 
 #### `brewing-tooltip`
 
-Define what should be displayed when the brew is in a brewing process, i.e barrel or distillery. Eevery modifier has a custom tag here
+Позволяет указать, что отображать в описании напитка в случае, если он еще не готов полностью, например, еще лежит в бочке или перегонном кубе. У каждого модификатора есть кастомный тег для этого.
 
 #### `default-tooltip`
 
-Define what should be displayed when the brew is not in a brewing process, i.e barrel or distillery. Every modifier has a custom tag here
+Позволяет указать, что именно отображать в описании готового напитка. У каждого модификатора есть кастомный тег для этого.
 
 #### `sealed-tooltip`
 
-Define what should be displayed when the brew is sealed. Every modifier has a custom tag here
+Позволяет указать, что именно отображать в описании запечатанного напитка. У каждого модификатора есть кастомный тег для этого.
 
 ### Consumables
 
-You can define items made outside TheBrewingProject to apply modifiers to a player, for example bread
+Позволяет указать предметы не из TheBrewingProject, которые будут изменять этот модификатор у игрока. Хлеб, например.
+
+*Я не понял многое из того, что переводил. Методом проб и ошибок, друзья. Ну или спрашивайте на дискорд сервере, если хорошо говорите на английском.*

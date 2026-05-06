@@ -1,94 +1,94 @@
 ---
-title: "Basics"
+title: "Главное"
 ---
 
 import { DynamicLink } from "fumadocs-core/dynamic-link";
 import { MiniMessageRenderer } from "@/components/minimessage";
 
-## The Quality System
+## Система качества
 
-TheBrewingProject features a quality system where every brew can turn out **Bad**, **Good**, or **Excellent**.  
-This makes the brewing process more engaging and rewarding for players.
+TheBrewingProject добавляет систему качества напитков. Они могут быть **плохими**, **хорошими** или **отличными**.  
+Это делает процесс приготовления напитков более привлекательным и награждающим.
 
-Quality Factored Properties are configuration options that allow you to define values or behaviors that change based on the final quality of the brew.
+**Качествозависимые параметры** - это параметры настройки рецептов/напитков, позволяющие указывать те или иные значения, применяемые в зависимости от качества приготовленного напитка.
 
 ### Quality Factored Value
 
-A Quality Factored Value allows a single property, such as an item's name or a brew's alcohol content, to change depending on the quality.  
-You define this by providing three values separated by slashes in the format: `Bad/Good/Excellent`.
+Качествозависимое **значение** позволяет одному значению, например названию напитка или алкогольности, быть разным в зависимости от качества.
 
-#### Example
+Для указания такого значения нужно задать **три** варианта, разделённых `/` слэшами: `Плохо/Хорошо/Отлично`.
+
+#### Пример
 
 ```yaml
-name: Skunked Beer/<gold>Beer/<gradient:#ff8412:#ffdf29><b>Golden Lager
+name: Вонючее пиво/<gold>Пиво/<gradient:#ff8412:#ffdf29><b>Золотой лагер
 ```
 
-| Quality   | Resulting Name                                                           |
-| --------- | ------------------------------------------------------------------------ |
-| Excellent | <MiniMessageRenderer text="<gradient:#ff8412:#ffdf29><b>Golden Lager" /> |
-| Good      | <MiniMessageRenderer text="<gold>Beer" />                                |
-| Bad       | <MiniMessageRenderer text="Skunked Beer" />                              |
+| Quality   | Resulting Name                                                            |
+| --------- | ------------------------------------------------------------------------  |
+| Отлично   | <MiniMessageRenderer text="<gradient:#ff8412:#ffdf29><b>Золотой лагер" /> |
+| Хорошо    | <MiniMessageRenderer text="<gold>Пиво" />                                 |
+| Плохо     | <MiniMessageRenderer text="Вонючее пиво" />                               |
 
 ### Quality Factored List
 
-A Quality Factored List allows you to conditionally include items in a list, such as lore lines or potion effects, based on the brew's quality.
+Качествозависимый **список** позволяет вам использовать список из нескольких значений, зависящих от качества.
 
-You control this by prefixing list items with `+` symbols.
+Для создания такого списка нужно использовать плюсы перед значениями.
 
-| Prefix | Applies To Quality | Description                                                          |
-| ------ | ------------------ | -------------------------------------------------------------------- |
-| `+++`  | Excellent only     | The item is included _only_ if the brew is of Excellent quality.     |
-| `++`   | Good only          | The item is included _only_ if the brew is of Good quality.          |
-| `+`    | Bad only           | The item is included _only_ if the brew is of Bad quality.           |
-| (none) | All Qualities      | The item is included regardless of the brew's quality (the default). |
+| Префикс | Применяется к качеству | Описание                                                   |
+| ------ | ------------------      | ---------------------------------------------------------- |
+| `+++`  | Только отличное         | Применяется _только_ если качество напитка - отлично.      |
+| `++`   | Только хорошее          | Применяется _только_ если качество напитка - хорошо.       |
+| `+`    | Только плохое           | Применяется _только_ если качество напитка - плохо.        |
+| (нет)  | Любое качество          | Применяется независимо от качества напитка (по умолчанию). |
 
-#### Example
+#### Пример
 
 ```yaml
 lore:
-    - +++<gold>A rare, top-shelf beer, perfect for connoisseurs.
-    - +++<green>A well-balanced brew, favored by many.
-    - ++<yellow>A decent brew, great for relaxing after a hard day's work.
-    - +<gray>A cloudy, sluggish mixture.
-    - <italic>This message is always included, regardless of quality.
+    - +++<gold>Редкое, премиальное пиво, идеальное для ценителей.
+    - +++<green>Хорошо сбалансированный напиток, любимый многими.
+    - ++<yellow>Приличный напиток, прекрасно подходящий для отдыха после тяжкого дня.
+    - +<gray>Мутная и вязкая смесь.
+    - <italic>Это сообщение показывается всегда, вне зависимости от качества.
 ```
 
-## Ingredients
+## Ингредиенты
 
-Ingredients are the building blocks of your recipes. An ingredient can be a vanilla Minecraft item, an item from another supported plugin, or even another brew created with TheBrewingProject.
+Ингредиенты - фундамент вашего рецепта. Ингредиентом может выступать ванильный предмет игры, предмет из поддерживаемого плагина или же другой приготовленный в TBP напиток.
 
-Ingredients are defined as a list under the `ingredients` key in a brewing step. The format for defining an ingredient depends on the type of item:
+Ингредиенты указываются списком в разделе `ingredients:` внутри шага приготовления. Формат указания ингредиента зависит от того, из какой вышеупомянутой категории предмет:
 
-| Format                             | Description                                                                                                                                               |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<item_id>/<amount>`               | A Minecraft item.                                                                                                                                         |
-| `<plugin_name>:<item_id>/<amount>` | An item from another plugin. See <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/integrations">Integrations</DynamicLink> page.           |
-| `brewery:<brew_id>/<amount>`       | Another brew from TheBrewingProject.                                                                                                                      |
-| `#brewery:<group_id>/amount`       | An ingredient group reference. See <DynamicLink href="/[lang]/docs/tbp/for-server-owners/config/ingredient-groups/">Ingredient Groups</DynamicLink> page. |
+| Формат                                 | Описание                                                                                                                                           |
+| ----------------------------------     | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<item_id>/<количество>`               | Обычный предмет из игры                                                                                                                            |
+| `<plugin_name>:<item_id>/<количество>` | Предмет из другого плагина. Смотри страницу <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/integrations">Интеграций</DynamicLink> |
+| `brewery:<brew_id>/<количество>`       | Другой напиток из TheBrewingProject.                                                                                                               |
+| `#brewery:<group_id>/количество`       | Группа ингредиентов. Смотри <DynamicLink href="/[lang]/docs/tbp/for-server-owners/config/ingredient-groups/">эту страницу</DynamicLink>.           |
 
-Example:
+Пример:
 
 ```yaml
 ingredients:
-    - emerald/5 # 5 Emeralds.
-    - nexo:infused_golden_apple/2 # 2 Infused Golden Apples from the Nexo plugin.
-    - brewery:beer/1 # 1 Beer from TheBrewingProject.
-    - "#brewery:grass/1" # One item from the grass group
+    - emerald/5 # 5 изумрудов.
+    - nexo:infused_golden_apple/2 # 2 Infused Golden Apple из плагина Nexo.
+    - brewery:beer/1 # 1 Пиво из TheBrewingProject.
+    - "#brewery:grass/1" # Один предмет из группы ингредиентов grass
 ```
 
-<Callout title="Yaml and '#'">
-    Note that every ingredient group has to be within quotes, otherwise it would count as a comment due to the `#`
-    symbol
+<Callout title="Yaml и '#'">
+    Учтите, что каждую группу ингредиентов нужно указывать в `"кавычках"`, иначе yaml сочтёт это за комментарий из-за наличия символа решётки.
 </Callout>
 
-## MiniMessage Formatting
+## MiniMessage-форматирование
 
-Every message or text in the recipe configuration is going to be formatted using MiniMessage.  
-**Legacy formatting codes (e.g., &a, §l) are not supported.**
+Любое сообщение или текст в конфигурации форматируется при помощи MiniMessage.  
+**Legacy-форматирование (&a, §l и т.д.) не поддерживается.**
 
-| Message                                     | Preview                                                                  |
+| Сообщение                                   | Превью                                                                   |
 | ------------------------------------------- | ------------------------------------------------------------------------ |
 | `<dark_green><bold>Test<reset><#2080ff>123` | <MiniMessageRenderer text="<dark_green><bold>Test<reset><#2080ff>123" /> |
 | `<gradient:#ff0000:#0000ff>Gradient Text`   | <MiniMessageRenderer text="<gradient:#ff0000:#0000ff>Gradient Text" />   |
 
-For a complete guide on syntax and features, please refer to the official [MiniMessage Format Documentation](https://docs.advntr.dev/minimessage/format).
+Полный гайд по синтаксису и функциям MiniMessage можно посмотреть в [официальной документации](https://docs.advntr.dev/minimessage/format).

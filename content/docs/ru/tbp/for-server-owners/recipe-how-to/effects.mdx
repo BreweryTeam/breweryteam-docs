@@ -1,68 +1,68 @@
 ---
-title: "Effects"
+title: "Эффекты"
 ---
 
 import { DynamicLink } from "fumadocs-core/dynamic-link";
 
-## Introduction
+## Вступление
 
-TBP allows you to define custom effects that are applied to players when they consume brews.  
-To add effects to your brews, you need to configure them in the `effects` section of a brew's recipe (in the `recipes.yml` file).
+В TBP вы можете добавить эффекты зелий напиткам, они будут накладываться при выпивании бутылки.  
+Чтобы дать вашему напитку эффекты, их нужно добавить в секцию `effects:` вашего рецепта (который, в свою очередь, находится в `recipes.yml`)
 
-## Effect Configuration
+## Настройка эффектов 
 
-Each effect is defined by its type, duration, amplifier. They can also be configured to apply conditionally based on the brew's quality.
+Каждый эффект описывается с помощью указания его типа, длительности, усиления (не уровня!). Их также можно сделать зависимыми от уровня качества готового напитка.
 
-### Format
+### Формат
 
-Effects are defined using the following format:
+Формат добавления рецептов следующий:
 
 ```yaml
 effects:
     - <EFFECT_TYPE>/<AMPLIFIER>/<DURATION>
 ```
 
-- `EFFECT_TYPE`: The type of effect to apply (e.g., `SPEED`, `POISON`, `REGENERATION`). You can find a list of all available effect types in the [PaperMC's Javadocs](https://jd.papermc.io/paper/1.21.10/org/bukkit/potion/PotionEffectType.html).
-- `AMPLIFIER`: The strength of the effect (0 for level I, 1 for level II, etc.).
-- `DURATION`: The duration of the effect in seconds.
+- `EFFECT_TYPE`: Тип(id) эффекта (e.g., `SPEED`, `POISON`, `REGENERATION`). Полный список можно найти в [PaperMC's Javadocs](https://jd.papermc.io/paper/1.21.10/org/bukkit/potion/PotionEffectType.html).
+- `AMPLIFIER`: Усиление эффекта (не уровень, а то, на сколько уровней его усилить. То есть 0 = эффект I-го уровня, 1 = эффект II-го уровня, и т.д.)
+- `DURATION`: Длительность в секундах
 
-#### Ranges
+#### Разброс
 
-You can also specify ranges for the amplifier and duration to introduce variability in the effects. Use the following format:
+Можно также указать разбросы при помощи тире, чтобы добавить элемент случайности:
 
 ```yaml
 effects:
     - <EFFECT_TYPE>/<AMPLIFIER_MIN>-<AMPLIFIER_MAX>/<DURATION_MIN>-<DURATION_MAX>
 ```
 
-A random value within the specified range will be chosen each time the effect is applied.
+Будет применено случайное значение между указанными минимумом и максимумом каждый раз при наложении эффекта.
 
-<Callout type="warn" title="BreweryX">
+<Callout type="warn" title="Но ведь в BreweryX было не так!">
 
-If you're coming from BreweryX, you may remember that the ranges were used for specifying different values based on brew quality.
+Если вы переходите с BreweryX, то скорее всего вы в курсе, что там это работает по-другому: значение из разброса выбирается не случайно, а в зависимости от качества.
 
-In TBP, this is no longer the case. Instead, you can define quality-specific effects using the new format described below.
+В TBP такого больше нет, по крайней мере, в прежнем виде. Вместо этого вы можете сделать зависимый от качества эффект при помощи знакомого некоторым формата с плюсиками.
 
 </Callout>
 
-#### Quality Factored Effects
+#### Эффекты, зависящие от качества
 
-You can define effects that apply only to specific brew qualities by prefixing the effect definition with `+++`, `++`, or `+`.  
-This format is described more in detail in the <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">Quality Factored List</DynamicLink> section of the Basics page.
+Вы можете сделать так, чтобы эффект накладывался лишь при определённом уровне качества напитка, используя `+++`, `++` и `+`  
+Более подробно о "плюсиках" можно прочитать <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">здесь</DynamicLink>.
 
 ```yaml
 effects:
-    - +++<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # Excellent only
-    - ++<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # Good only
-    - +<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # Bad only
-    - <EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # All qualities
+    - +++<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # только у отличных
+    - ++<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # только у хороших
+    - +<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # только у плохих
+    - <EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # при любом качестве
 ```
 
-## Examples
+## Примеры
 
-### Simple Example
+### Простенький пример
 
-A brew that gives a Speed II effect for 45 seconds, and a Jump Boost I effect for a random duration between 30 and 60 seconds:
+Напиток, дающий Скорость II на 45 сек и Прыгучесть I на 30-60 (случайно) секунд:
 
 ```yaml
 effects:
@@ -70,12 +70,12 @@ effects:
     - JUMP_BOOST/0/30-60
 ```
 
-### A more complex example
+### Более сложный пример
 
-- A strong poison effect for Bad quality brews, and a weak poison effect for Good quality brews. No poison effect for Excellent quality brews.
-- A speed boost that increases in strength with the quality of the brew.
-- Regeneration and absorption only for Excellent quality brews.
-- A nausea effect for all qualities.
+- Сильное отравление при плохом качестве, слабое отравление при хорошем качестве, нет отравления при отличном качестве.
+- Скорость, увеличивающаяся в силе и длительности по мере улучшения качества
+- Регенерация и поглощение, только при отличном качестве.
+- Тошнота при любом качестве
 
 ```yaml
 effects:

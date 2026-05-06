@@ -1,43 +1,43 @@
 ---
-title: "Migrating from BreweryX"
+title: "Переход с BreweryX"
 ---
 
 import { Step, Steps } from "fumadocs-ui/components/steps";
 
-You can now migrate from BreweryX, this is how it's done:
+Существует возможность быстро перенести большинство ваших прибамбасов из BreweryX, вот как это делается:
 
 <Steps>
 
 <Step>
-    Obtain
-    [this](https://ci.breweryteam.dev/job/BreweryTeam/job/TheBrewingProject/job/master/lastBuild/artifact/migration/build/libs/TheBrewingProjectMigration-master.jar)
-    migration plugin file
+    Скачайте
+    [вот этот](https://ci.breweryteam.dev/job/BreweryTeam/job/TheBrewingProject/job/master/lastBuild/artifact/migration/build/libs/TheBrewingProjectMigration-master.jar)
+    файл. Это плагин для миграции файлов.
 </Step>
 
-<Step>Add the migration plugin you downloaded and TheBrewingProject into your `/plugins` folder</Step>
+<Step>Закиньте скачанный плагин-мигратор в папку `/plugins/`. Убедитесь, что у вас уже установлен TheBrewingProject.</Step>
 
 <Step>
-    You can now run your server
+    Запустите ваш сервер.
 </Step>
 <Step>
-    After the server has started, stop the server and remove both BreweryX and the migration plugin
+    После полного запуска сервера, вновь остановите его и удалите jar-файлы мигратора и BreweryX.
 </Step>
 </Steps>
 
-### What will be migrated?
+### Что будет перенесено?
 
-- Barrels (any non brews will be erased)
-- Brews inside containers - everytime a player opens a container, TheBrewingProject will check if it contains a BreweryX brew and migrate it if needed. (and no, you don't need the migration plugin for this)
-- Cauldrons with their brew progress and ingredients
-- Everything in the `recipes.yml` file, except for:
-    - Most ingredient defined in `custom-items.yml`
-    - Other brews as ingredients might also break, as the brew display name can no longer be used as a key.
+- Бочки (но любые не-напитки внутри будут удалены)
+- Напитки, хранящиеся где-то: когда игрок откроет контейнер, TheBrewingProject проверит, есть ли внутри напитки из BreweryX, и сконвертирует их, если требуется. (и нет, для работы этой функции наличие плагина-мигратора не требуется)
+- Котлы с их текущим прогрессом варки и всеми ингредиентами внутри
+- Всё в файле `recipes.yml`, КРОМЕ:
+    - Большинства кастомных ингредиентов из `custom-items.yml`
+	- Ингредиенты-напитки тоже могут сломаться, поскольку их display-name больше не может использоваться в качестве обозначения ингредиента.
 
-Direct command definitions for recipes are no longer possible in TheBrewingProject, these will automatically be migrated over to event definitions, see `events.yml`
+Заданные в рецептах команды, выполняемые при выпивании напитка, больше невозможны в прежнем виде в TheBrewingProject. Они автоматически будут сконвертированы в события. Ищите их в файле `events.yml`
 
-### What will **not** be migrated?
+### Что **НЕ** будет перенесено?
 
-Everything not listed in the above section will not be migrated, this includes:
+Всё, что не перечислено в списке выше, не будет автоматически перенесено, включая:
 
 - `config.yml`
 - `custom-items.yml`

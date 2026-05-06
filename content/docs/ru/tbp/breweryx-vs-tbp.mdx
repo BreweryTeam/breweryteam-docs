@@ -1,36 +1,34 @@
 ---
-title: "BreweryX vs TBP"
+title: "Сравнение BreweryX и TBP"
 icon: Scale
 ---
 
-### At a glance
+### Кратко
 
-BreweryX is more tested, as it's a 10-year-old project, but its rewrite, TBP, has much cleaner code, more advanced features and maintenance priority
+BreweryX лучше протестирован, поскольку берёт свое начало из 10-летнего проекта, в то время как его перепис, TBP, имеет гораздо более чистый код, больше продвинутых фич и приоритет в разработке и поддержке.
 
 <Callout type="info">
-    There's a good chance that this page is already outdated, as TBP is in very active development, so if you want to
-    know the current state of things, check out [the
-    changelog](https://modrinth.com/plugin/thebrewingproject/changelog).
+    Есть большой шанс того, что эта страница уже устаревшая, поскольку TBP разрабатывается очень активно. Поэтому если вы хотите наверняка узнать текущее положение дел, читайте [чейнджлог](https://modrinth.com/plugin/thebrewingproject/changelog).
 </Callout>
 
-### Differences
+### Различия
 
-- TBP supports custom multiblock structures as distilleries where BreweryX only allowed regular brewing stands to be used.
-- TBP doesn't copy every small feature from BreweryX to reduce the feature bloat, but if you need a specific thing, reach out to us, and we will consider it
-- TBP's brew creation is a bit less forgiving (customizable) so, on default settings, you can no longer make a beer with an entire stack of wheat if all other steps are ok
-- While the time it takes to distill something is specified per recipe in BreweryX, in TBP, this is specified per distillery, so you can have faster and slower distilleries
-- BreweryX encrypts its data the will-deter-average-people way, while TBP encrypts its data the don't-even-try-to-decrypt-that way and supports easy encryption-key rotation
+- TBP поддерживает кастомные мультиблочные структуры. Например, кастомные перегонные кубы, в то время как bX для дистилляции может использовать лишь варочные стойки.
+- TBP не копирует каждую микрофичу из bX, чтобы не перегружать плагин, но если что-то конкретное вам нужно, то обратитесь к нам, и мы подумаем над этим.
+- Система создания в TBP менее щадящая (но настраиваемая), так что теперь у вас не получится успешно сварить дефолтное пиво из стака пшеницы, если все остальные шаги при этом идеальны.
+- В BreweryX время, требующееся для дистилляции, настраивается по рецептам, в то время как в TBP оно настраивается отдельно для каждого вида перегонной конструкции (см. первый пункт), что позволяет делать какие-то из них медленнее, а какие-то быстрее.
+- BreweryX шифрует свои данные способом уровня "отпугнёт-начинающих-хацкеров", в то время как TBP шифрует данные способом уровня "ну-давай-попробуй-умник", и поддерживает лёгкую ротацию ключа шифрования.
 
-### New features in TBP
+### Новые функции TBP
 
-- The distillery is now its own multiblock structure, made up of three decorated pots and three bamboo fences
-- You may define your own custom multiblock structures to be used as barrels or distilleries, by using schematics
-- An event system allows fine-tuning what drinks cause what after effects + you may create your own custom events
-- You can introduce your own modifiers instead of- or in addition to alcohol, toxins and alcohol-addiction/tolerance
-- The order of steps in a recipe is not pre-defined, so you could do `distill➜age➜cook➜cook➜age➜distill` for example
-- You can freely choose the output material of a potion, so a haste potion can look like a diamond pickaxe if you wish
-- Group ingredients together to, for example, allow any kind of grass, with dried grass leading to lower drink quality
-- A new `mix` step that is basically the same as `cook`, but without a heat source underneath the cauldron
-- The `cook` and `mix` steps can require a specific substance in the cauldron (water/lava/snow)
+- Теперь для дистилляции вместо варочной стойки используется собственная мультиблочная структура, создаваемая из трёх узорчатых ваз и трех бамбуковых заборов.
+- При помощи schematic-файлов можно добавить собственные мультиблоки для бочек и дистилляции.
+- Система "событий" позволяет тонко настроить, что произойдет при употреблении тех или иных напитков. Плюс можно добавлять свои собственные события.
+- Есть также система модификаторов, включающая в себя опьянение, токсины, и зависимость/толерантность к алкоголю. Опять же, можно создать собственные модификаторы.
+- Порядок шагов при приготовлении не статичен, поэтому теперь можно, например, создать напиток, который готовится в таком порядке: `дистилляция➜бочка➜варка➜еще раз варка➜еще раз бочка➜еще раз дистилляция`
+- Можно свободно изменять итоговый предмет при создании. Например, чтобы напиток, дающий ускорение, выглядел как алмазная кирка. *Я знаю, о чем ты думаешь, мамкин нарколыга.*
+- Ингредиенты можно группировать, чтобы, например, допускать в рецепт любой вид травы, но при этом чтобы сухая трава уменьшала качество.
+- Появился новый этап готовки - `mix` (смешивание). Осуществляется так же, как и варка в котле, но без источника тепла снизу.
+- Можно задать в рецепте требование определенной субстанции в котле (вода/лава/снег) при варке и/или смешивании.
 
 [![](/assets/docs/tbp/misc/breweryx-vs-tbp/differences.png)](https://canary.discord.com/channels/1108854517048549396/1272805304601415711/1396831593892548680)

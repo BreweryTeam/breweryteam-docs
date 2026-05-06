@@ -1,72 +1,72 @@
 ---
-title: "Resulting item"
+title: "Настройка итогового предмета"
 ---
 
 import { DynamicLink } from "fumadocs-core/dynamic-link";
 
-By default, the result item will be `minecraft:potion`.
+По умолчанию, итоговый предмет всегда `minecraft:potion`.
 
-## Color \*
+## Цвет зелья \*
 
-This is how you specify a color of the brew.
-
-```yml
-my_recipe:
-  ...
-  potion-attributes.color: "#FFFFFF" # White
-```
-
-<Callout title="Quality factored value">
-    See{" "}
-    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
-        Quality Factored Value
-    </DynamicLink>{" "}
-    for more information.
-</Callout>
-
-## Name \*
-
-This is how you specify the name of the brew.
+Вот как можно указать желаемый цвет зелья:
 
 ```yml
 my_recipe:
   ...
-  potion-attributes.name: Bad/Good/Excellent
+  potion-attributes.color: "#FFFFFF" # Белый
 ```
 
-<Callout title="Quality factored value">
-    See{" "}
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
     <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
         Quality Factored Value
     </DynamicLink>{" "}
-    for more information.
+    для большей информации.
 </Callout>
 
-## Lore
+## Название \*
 
-This is how you specify the lore of a brew:
+Вот как можно указать название напитку:
+
+```yml
+my_recipe:
+  ...
+  potion-attributes.name: Плохое пиво/Хорошее пиво/Жидкое золото
+```
+
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
+        Quality Factored Value
+    </DynamicLink>{" "}
+    для большей информации.
+</Callout>
+
+## Описание (лор)
+
+Вот как можно задать напитку описание:
 
 ```yml
 my_recipe:
   ...
   potion-attributes.lore:
-    - I love my
-    - +Bad brew
-    - ++Good brew
-    - +++Excellent brew
+    - И всё-таки это
+    - +полное дерьмо
+    - ++хороший пивас
+    - +++шедевр
 ```
 
-<Callout title="Quality factored list">
-    See{" "}
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
     <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">
         Quality Factored List
     </DynamicLink>{" "}
-    for more information.
+    для большей информации.
 </Callout>
 
-## Custom textures
+## Кастомные текстуры
 
-You can specify either custom model data, or item model like this:
+Вы можете указать custom model data или item model вот так:
 
 ```yml
 my_recipe:
@@ -75,17 +75,17 @@ my_recipe:
   potion-attributes.item-model: dirt/sand/gravel
 ```
 
-<Callout title="Quality factored value">
-    See{" "}
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
     <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
         Quality Factored Value
     </DynamicLink>{" "}
-    for more information.
+    для большей информации.
 </Callout>
 
-## Custom resulting item
+## Кастомный предмет-результат
 
-If you want the resulting item to have a different material than `minecraft:potion`, then this can be changed like this:
+Если вы хотите, чтобы итоговый предмет был не зельем, а чем-то другим, это можно изменить:
 
 ```yml
 my_recipe:
@@ -93,12 +93,12 @@ my_recipe:
   potion-attributes.custom-id: splash_potion/splash_potion/lingering_potion
 ```
 
-With that example, you can now throw brews that affect other players!
+Напитки из этого примера можно швырять в других игроков!
 
-<Callout title="Quality factored value">
-    See{" "}
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
     <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
         Quality Factored Value
     </DynamicLink>{" "}
-    for more information.
+    для большей информации.
 </Callout>
