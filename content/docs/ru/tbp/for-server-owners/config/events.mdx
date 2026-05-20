@@ -1,0 +1,221 @@
+---
+title: "События"
+---
+
+События - это система для выполнения комманд, применения эффектов, отправки сообщений, и применения других событий. Вся конфигурация событий находится в `events.yml`
+
+## Random drunken events
+
+События, происходящие случайно, пока у игрока достаточно опьянения и/или токсинов.
+
+```yml
+enabled-random-events:
+    - puke
+    - memory_loss
+    - stumble
+    - chicken
+    - drunk_message
+    - nausea
+```
+
+## Pass out time
+
+Сколько минут игрок должен находиться в отрубе во время события `pass_out`
+
+```yml
+pass-out-time: 5
+```
+
+## Teleport destinations
+
+Куда игрок должен быть телепортирован (выбирается рандомно, если несколько) во время события с телепортацией
+
+```yml
+teleport-destinations:
+    - world, x, y, z
+```
+
+## Drunken messages
+
+Какие сообщения должны отправляться от имени игрока во время события drunk_message.
+
+```yml
+messages:
+    - I love you <random_player_name>, you're my best friend.
+    - I could do one more.
+    - Who is she?
+    - Watch this!
+    - I'm not drunk. You're drunk.
+```
+
+<Callout title="Лучше держите выключенным">
+    Может очень раздражать иметь в чате вот такой спам повторяющимися сообщениями, лучше держите это подальше от случайных пьяных событий.
+</Callout>
+
+## Кастомные события
+
+Вот как добавлять свои собственные события
+
+```yml
+custom-events:
+    memory_loss:
+        steps:
+            - named-event: pass_out
+              wait-condition: join
+            - named-event: teleport
+              consume:
+                  alcohol: -30
+                  toxins: -15
+```
+
+Система кастомных событий tbp крайне гибка и может использоваться для очень многих вещей. При помощи кастомных событий можно выполнять команды, проигрывать эффекты, и делать почти всё что угодно. Почти как отдельный язык программирования!
+
+Наиболее простой вариант пользовательских событий - это просто линейный порядок выполнения нескольких шагов события:
+
+```yml
+- Сначала этот шаг
+- Потом этот
+- А этот позже всех
+```
+
+Разберём все возможные параметры для шагов.
+
+### `named-event`
+
+Запустить предопределённое событие (некоторые из них мы разбирали в начале этой страницы).
+
+Возможные значения: `puke`, `pass_out`, `stumble`, `chicken`, `teleport`, `drunk_message`, `nausea`, `fever`, `hallucination`, `kaboom`. Список может пополняться.
+
+### `wait-duration`
+
+Подождать какое-то время перед переходом к следующему шагу, `10s 10t` - подождать 10 секунд и 10 тиков.
+
+### `wait-condition`
+
+Ждать выполнения определённого условия, прежде чем текущий шаг запустится. Вот как задаётся каждое условие:
+
+```yml
+steps:
+    - wait-condition: died
+    - wait-condition: joined-server
+    - wait-condition:
+          joined-world: my-world-name
+    - wait-condition: took-damage
+```
+
+### `if-condition`
+
+Продолжать лишь при соблюдении условия, в противном случае прервать выполнение события. Вот как задаётся if-условие:
+
+```yml
+steps:
+    - if-condition:
+          modifier-above:
+              modifier: alcohol
+              value: 70
+    - if-condition:
+          has-permission: my-permission
+    - if-condition:
+          joined-world: my-world-name
+```
+
+Вы также можете интвертировать условие, добавив `not`:
+
+```yml
+steps:
+    - if-condition:
+          not:
+              has-permission: my-permission
+```
+
+### `consume`
+
+Изменить указанные модификаторы. Пример:
+
+```yml
+steps:
+    - consume:
+          alcohol: 10
+          my_modifier: -20
+```
+
+### `event`
+
+Задать другое событие с помощью параметра (может быть как кастомным так и предопределенным)
+
+### `effect`
+
+Наложить эффект на игрока. Требуется указать эффект, усиление и длительность. Пример:
+
+```yml
+steps:
+    - effect: poison
+      amplifier: 1;2
+      duration: 20;100
+```
+
+Наложит на игрока отравление со случайным усилением 1-2 (**т.е. уровнем 2-3**) и длительностью 20-100
+
+### `command`
+
+Выполнить команду. Требуется указать саму команду. Исполнителя можно указать с помощью параметра `as`
+
+```yml
+steps:
+    - command: ping
+      as: player # Выполнить с разрешениями игрока
+    - command: pong
+      as: server # Выполнить с разрешениями консоли
+```
+
+### `location`
+
+Установить позицию для телепортации игрока. Пример:
+
+```yml
+steps:
+    - location: worldname 1 2 3
+```
+
+Телепортирует игрока в мир `worldname` на координаты x=1, y=2, z=3
+
+### `integration-event`
+
+Запустить событие из интеграции
+
+```yml
+steps:
+    - integration-event: gsit:sit
+```
+
+## Пример события
+
+Данный пример описывает событие с указанием шансов и разбросов. Благодаря этому, данное событие можно использовать в разделе [enabled-random-events](./events#random-drunken-events) в файле.
+
+```yml
+repeating_drunken_walk:
+    probability:
+        probability-expression: 4*probabilityWeight(alcohol)
+        allowed-ranges:
+            alcohol:
+                min: 60.0
+                max: 100.0
+    display-name: walk unsteadily
+    steps:
+        - named-event: drunken_walk
+        - wait-duration: 20s 1t
+        - if-condition:
+              modifier-above:
+                  modifier: alcohol
+                  value: 60.0
+        - event: repeating_drunken_walk
+```
+
+Получается следующее:
+
+1. Запустить предустановленное событие drunken walk
+2. Ждать 20 секунд и 1 тик
+3. Перейти к следующему шагу, если количество опьянения выше 60, в противном случае отмена.
+4. Вернуться к шагу 1, т.е. запустить это событие заново.
+
+На выходе получаем бесконечную пьяную походку, пока ваш уровень опьянения выше 60.

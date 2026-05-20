@@ -1,0 +1,6 @@
+{
+    "title": "Главная",
+    "root": true,
+    "icon": "House",
+    "pages": ["index"]
+}

@@ -1,0 +1,19 @@
+---
+title: "/breweryx delete"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx delete"
+    subcommands={[
+        {
+            syntax: "/breweryx delete",
+            permission: "brewery.cmd.delete",
+        },
+    ]}
+    executor={CommandExecutor.PLAYER_ONLY}
+/>
+
+Ликвидирует напиток в руке.

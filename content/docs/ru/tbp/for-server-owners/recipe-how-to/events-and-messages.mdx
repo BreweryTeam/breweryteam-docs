@@ -1,0 +1,47 @@
+---
+title: "События и сообщения"
+---
+
+import { DynamicLink } from "fumadocs-core/dynamic-link";
+
+## События
+
+Вы можете назначать напиткам <DynamicLink href="/[lang]/docs/tbp/for-server-owners/config/events/">события</DynamicLink>, выполняемые при выпивании:
+
+```yml
+my_brew:
+  ...
+  events:
+    - +stumble
+    - ++gsit:sit
+    - +++my_custom_event
+    - tunnel_vision
+```
+
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">
+        Quality Factored List
+    </DynamicLink>{" "}
+    для большей информации
+</Callout>
+
+## Отправка сообщений
+
+Вы можете настроить показ сообщений игроку при выпивании напитка. Они используют специальное форматирование [MiniMessage](https://docs.advntr.dev/minimessage/format), так что привычные "&" цветовые коды работать не будут! Смотрите ссылку.
+
+```yml
+my_brew:
+   ...
+   messages.action-bar: Это сообщение будет показано в акшн-баре (над полоской опыта)
+   messages.title: Это сообщение будет показано на экране
+   messages.message: А это будет показано в чате.
+```
+
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
+        Quality Factored Value
+    </DynamicLink>{" "}
+    для большей информации. Если вы хотите сделать несколько линий текста, то используйте MiniMessage-тег `br` или `newline`{" "}
+</Callout>

@@ -1,0 +1,92 @@
+---
+title: "Шаги приготовления"
+---
+
+import { DynamicLink } from "fumadocs-core/dynamic-link";
+
+## Вступление
+
+Указывая шаги при настройке рецепта, вы указываете их для идеального напитка. Реальный процесс приготовления необязательно должен 100%-но соответствовать всем указанным шагам, но качество пострадает.
+
+На данный момент в TheBrewingProject существует 4 возможных вида шагов:
+
+| Вид шага         | ID        |
+| ----------       | --------- |
+| Варка            | `cook`    |
+| Смешивание       | `mix`     |
+| Дистилляция      | `distill` |
+| Выдержка (бочка) | `age`     |
+
+<Callout title="Первоначальные шаги">Рецепт приготовления напитка всегда должен начинаться с варки или/и смешивания!</Callout>
+
+## Формат шагов
+
+Каждый вид шагов использует собственный формат.
+
+### Готовка
+
+Пример готовки:
+
+```yml
+- type: cook
+  cook-time: 2min
+  cauldron-type: water
+  ingredients:
+      - apple/10
+      - my_plugin_name:sugar/64
+```
+
+<Callout title="Нужно указать ингредиенты">
+    Смотрите
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#ingredients">
+        Ingredients Basics
+    </DynamicLink>
+    для большей информации об ингредиентах
+</Callout>
+
+### Смешивание
+
+Пример смешивания:
+
+```yml
+- type: mix
+  mix-time: 2min
+  cauldron-type: water # Not read at the moment
+  ingredients:
+      - brewery:gin/3
+      - sugar/2
+```
+
+<Callout title="Нужно указать ингредиенты">
+    Смотрите
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#ingredients">
+        Ingredients Basics
+    </DynamicLink>
+    для большей информации об ингредиентах
+</Callout>
+
+### Дистилляция
+
+Пример дистилляции:
+
+```yml
+- type: distill
+  runs: 3
+```
+
+Runs означает количество раз, которое требуется продистиллировать напиток для получения идеала.
+
+### Выдержка
+
+Пример выдержки:
+
+```yml
+- type: age
+  age-years: 13
+  barrel-type: any
+```
+
+<Callout title="Виды бочек">
+    Больше информации о видах бочек можно найти{" "}
+    <DynamicLink href="/[lang]/docs/tbp/gameplay/creating-brews/aging/#barrel-types">здесь</DynamicLink>
+</Callout>

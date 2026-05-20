@@ -1,0 +1,24 @@
+---
+title: "/breweryx age"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx age"
+    subcommands={[
+        {
+            syntax: "/breweryx age barrel_type time",
+            permission: "brewery.cmd.create",
+        },
+    ]}
+    executor={CommandExecutor.PLAYER_ONLY}
+/>
+
+Instantly ages the brew currently held in your main hand as if it had been sitting inside a barrel.
+
+## Arguments
+
+- `barrel_type`: The type of barrel to age the brew in.
+- `time`: A number of in-game years to age the brew for.

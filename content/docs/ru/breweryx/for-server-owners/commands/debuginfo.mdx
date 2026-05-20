@@ -1,0 +1,30 @@
+---
+title: "/breweryx debuginfo"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx debuginfo"
+    subcommands={[
+        {
+            syntax: "/breweryx debuginfo [recipe_name]",
+            permission: "brewery.cmd.debuginfo",
+        },
+    ]}
+    executor={CommandExecutor.ANY}
+/>
+
+Выводит отладочную информацию про напиток в руке:
+
+- Инфо о самом напитке
+    - Состав
+    - Время варки, кол-во дистилляций, возраст в бочке и т.д.
+    - Обнаруженное соответствие рецепту
+- Тесты рецепта
+    - Сравнит напиток относительно всех (либо указанного в команде) рецептов(-а) и покажет результаты сравнения, включая соответствие состава, времени готовки и т.д.
+
+## Аргументы
+
+- `[recipe_name]`: Укажите, если нужно сравнить напиток лишь с определенным рецептом.

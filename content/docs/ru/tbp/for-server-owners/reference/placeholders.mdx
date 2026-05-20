@@ -1,0 +1,23 @@
+---
+title: "Плейсхолдеры"
+---
+
+TheBrewingProject поддерживает как [PlaceholderAPI](https://github.com/PlaceholderAPI/PlaceholderAPI), так и [MiniPlaceholders](https://modrinth.com/plugin/miniplaceholders) отображения информации.
+
+Обратите внимание, что некоторые плагины не поддерживают PAPI или MiniPlaceholders.  
+Чтобы проверить наверняка, работает ли плейсхолдер, используйте следующую команду:
+
+```yaml
+# Для PlaceholderAPI
+/placeholderapi parse PLAYER PLACEHOLDER
+
+# Для MiniPlaceholders
+/miniplaceholders parse PLAYER PLACEHOLDER
+```
+
+## Плейсхолдеры игрока
+
+| PlaceholderAPI     | MiniPlaceholders   | Описание                                                                              |
+| ------------------ | ------------------ | ------------------------------------------------------------------------------------- |
+| `%tbp_[modifier]%` | `<tbp_[modifier]>` | Выводит текущее значение модификатора у конкретного игрока, например `%tbp_alcohol%`. |
+| `%tbp_next_event%` | `<tbp_next_event>` | Название следующего события, которое произойдет у пьяного игрока.                     |

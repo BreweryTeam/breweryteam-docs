@@ -1,0 +1,25 @@
+---
+title: "/breweryx drink"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx drink"
+    subcommands={[
+        {
+            syntax: "/breweryx drink recipe_name [quality] [player]",
+            permission: "brewery.cmd.drink",
+        },
+    ]}
+    executor={CommandExecutor.ANY}
+/>
+
+Симулирует выпивание указанного напитка игроку.
+
+## Аргументы
+
+- `recipe_name`: Какой рецепт споить.
+- `[quality]`: Качество напитка. Дефолтно - 10 (идеально).
+- `[player]`: Какому игроку споить напиток. Если команда выполняется из консоли, то аргумент обязателен.

@@ -1,0 +1,42 @@
+---
+title: "Котловые напитки"
+---
+*Они же - недовары. Они же - полуфабрикаты.*
+
+# Файл cauldron.yml
+
+`cauldron.yml` предназначен для настройки того, какие бутылки выходят из котла в зависимости от использованных ингредиентов.
+
+## Как это использовать?
+
+Записи из `Cauldron.yml` используются для того, чтобы сделать котлы более "интуитивными", добавляя им партиклы, цвет которых 
+зависит от времени варки и используемых ингредиентов, а также для того, чтобы задать "недовары"/"полуфабрикаты"/"котловые напитки". 
+У них нет особых эффектов - они выходят из котла, когда вложенные ингредиенты не соответствуют ни одному из рецептов, или же когда 
+напиток нуждается в дальнейшей обработке (дистилляция/бочка).  
+Например, поскольку пиво нуждается в настаивании после варки, логично сделать недовар вроде "пшеничного сусла", который получается при варке пшена в котле.
+
+## Задаём новые записи в cauldron.yml
+
+P.S. Переключите язык в конфиге на русский, комментарии в этом файле у вас на сервере тоже переведутся на русский.
+```yaml title="cauldron.yml"
+cauldron:
+    # The key of the cauldron entry. This doesn't really matter, but it must be unique.
+    exampleKey:
+        # Note: Brews declared here only come out of cauldrons when the cauldron CANNOT find a matching recipe!
+        # These entries will not override any declared recipes in your `recipes.yml` file.
+        name: Unknown Brew # The name of the brew.
+        color: BLACK # The color of the brew.
+        customModelData: 545 # The custom model data of the brew.
+        # The lore of the brew.
+        lore:
+            - You just created a completely useless brew!
+        # The ingriends that must be used to make this cauldron brew. One or more ingredients must match.
+        ingredients:
+            - Bedrock/2
+            - Diamond
+        # The cooking particles that will be used when brewing. Only ingredients have to match!
+        cookParticles:
+            - RED/5
+            - WHITE/10
+            - 800000/25
+```

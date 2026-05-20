@@ -62,7 +62,10 @@ export function Command(properties: CommandProperties) {
                 {normalizedSubcommands.map((subcommand, index) => (
                     <div className="contents" key={index}>
                         <CommandCard title="Syntax">
-                            <a href={subcommand.headerLink}  className="min-w-0 font-mono text-sm whitespace-pre-wrap wrap-break-word">
+                            <a
+                                href={subcommand.headerLink}
+                                className="min-w-0 font-mono text-sm whitespace-pre-wrap wrap-break-word"
+                            >
                                 {subcommand.syntax}
                             </a>
                         </CommandCard>

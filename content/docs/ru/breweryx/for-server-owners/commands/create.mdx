@@ -1,0 +1,25 @@
+---
+title: "/breweryx create"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx create"
+    subcommands={[
+        {
+            syntax: "/breweryx create recipe_name [quality] [player]",
+            permission: "brewery.cmd.create",
+        },
+    ]}
+    executor={CommandExecutor.ANY}
+/>
+
+Создаёт напиток, соответствующий выбранному рецепту.
+
+## Аргументы
+
+- `recipe_name`: Название (либо ID) рецепта
+- `[quality]`: Качество напитка. Дефолтное значение - 10 (идеально)
+- `[player]`: Какому игроку выдать напиток. Аргумент обязателен, если команда выполняется из консоли.

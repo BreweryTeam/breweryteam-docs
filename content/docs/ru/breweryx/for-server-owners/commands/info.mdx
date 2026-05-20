@@ -1,0 +1,40 @@
+---
+title: "/breweryx info"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx info"
+    subcommands={[
+        {
+            syntax: "/breweryx info",
+            permission: "brewery.cmd.info",
+            headerLink: "#breweryx-info",
+            executor: CommandExecutor.PLAYER_ONLY,
+        },
+        {
+            syntax: "/breweryx info player_name",
+            permission: ["brewery.cmd.info", "brewery.cmd.infoOther"],
+            headerLink: "#breweryx-info-player_name",
+            executor: CommandExecutor.ANY,
+        },
+    ]}
+/>
+
+Выводит информацию об уровне опьянения игрока.
+
+## Подкоманды
+
+### `/breweryx info`
+
+Выводит ваш собственный уровень опьянения.
+
+### `/breweryx info player_name`
+
+Выводит уровень опьянения определенного игрока. Эта команда может выполняться как от консоли, так и игроком. **Требует другое разрешение**
+
+#### Аргументы
+
+- `player_name`: Имя игрока.

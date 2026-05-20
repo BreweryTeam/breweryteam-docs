@@ -1,0 +1,49 @@
+---
+title: "Установка"
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import meta from "@/brewery-meta.ts";
+
+## Требования
+
+- `Java 25+`
+- `PaperMC 1.21.8+` (или любой подходящий форк, т.е. Folia, Purpur, ...), **SpigotMC работать не будет**
+
+<Callout title="Оптимизационные форки" type="warn">
+
+Многие форки PaperMC с большим упором на оптимизацию, по типу [Canvas](https://github.com/CraftCanvasMC/Canvas), [Leaf](https://github.com/Winds-Studio/Leaf) и [LightingLuminol](https://github.com/LuminolMC/LightingLuminol) часто могут вызывать проблемы с совместимостью некоторых плагинов.
+
+В случае с BreweryX мы уже получали отчеты о проблемах при их использовании (см. [issue #138](https://github.com/BreweryTeam/BreweryX/issues/138), [issue #85](https://github.com/BreweryTeam/BreweryX/issues/85)).
+
+Мы не можем гарантировать идеальную работу TheBrewingProject с этими форками, но в целом совместимость должна быть лучше, чем у BreweryX.
+
+</Callout>
+
+## Установка
+
+<Steps>
+
+<Step>
+    Скачайте плагин из желаемого источника: <a href={meta.download.modrinth}>Modrinth</a>,{" "}
+    <a href={meta.download.hangar}>Hangar</a> или <a href={meta.download.jenkins}>Jenkins (дев билды)</a>
+</Step>
+
+<Step>
+Поставьте плагин
+    - Остановите сервер
+    - Закиньте JAR-файл в папку `/plugins`
+    - Запустите сервер
+</Step>
+<Step>
+Всё, **TheBrewingProject** Установлен!
+</Step>
+</Steps>
+
+<Callout title="Problems?">
+
+Если вы столкнётесь с проблемами при установке, проверьте ваши логи на предмет ошибок. В них часто содержится информация, полезная для решения проблем.
+
+Если вам всё ещё нужна помощь, не стесняйтесь запрыгивать в наш <a href={meta.media.discord}>Discord-сервер</a>!
+
+</Callout>

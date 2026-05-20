@@ -1,0 +1,104 @@
+---
+title: "Настройка итогового предмета"
+---
+
+import { DynamicLink } from "fumadocs-core/dynamic-link";
+
+По умолчанию, итоговый предмет всегда `minecraft:potion`.
+
+## Цвет зелья \*
+
+Вот как можно указать желаемый цвет зелья:
+
+```yml
+my_recipe:
+  ...
+  potion-attributes.color: "#FFFFFF" # Белый
+```
+
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
+        Quality Factored Value
+    </DynamicLink>{" "}
+    для большей информации.
+</Callout>
+
+## Название \*
+
+Вот как можно указать название напитку:
+
+```yml
+my_recipe:
+  ...
+  potion-attributes.name: Плохое пиво/Хорошее пиво/Жидкое золото
+```
+
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
+        Quality Factored Value
+    </DynamicLink>{" "}
+    для большей информации.
+</Callout>
+
+## Описание (лор)
+
+Вот как можно задать напитку описание:
+
+```yml
+my_recipe:
+  ...
+  potion-attributes.lore:
+    - И всё-таки это
+    - +полное дерьмо
+    - ++хороший пивас
+    - +++шедевр
+```
+
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">
+        Quality Factored List
+    </DynamicLink>{" "}
+    для большей информации.
+</Callout>
+
+## Кастомные текстуры
+
+Вы можете указать custom model data или item model вот так:
+
+```yml
+my_recipe:
+  ...
+  potion-attributes.custom-model-data: 1/2/3
+  potion-attributes.item-model: dirt/sand/gravel
+```
+
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
+        Quality Factored Value
+    </DynamicLink>{" "}
+    для большей информации.
+</Callout>
+
+## Кастомный предмет-результат
+
+Если вы хотите, чтобы итоговый предмет был не зельем, а чем-то другим, это можно изменить:
+
+```yml
+my_recipe:
+  ...
+  potion-attributes.custom-id: splash_potion/splash_potion/lingering_potion
+```
+
+Напитки из этого примера можно швырять в других игроков!
+
+<Callout title="Поддерживает зависимость от качества напитка">
+    Смотрите{" "}
+    <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-value">
+        Quality Factored Value
+    </DynamicLink>{" "}
+    для большей информации.
+</Callout>

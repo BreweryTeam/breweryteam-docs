@@ -1,0 +1,28 @@
+---
+title: "Группы ингредиентов"
+---
+
+import { DynamicLink } from "fumadocs-core/dynamic-link";
+
+Группы ингредиентов полезны в случае, если нужно разрешить использование нескольких взаимозаменяемых ингредиентов в рецепте. Они настраиваются в файле `ingredients.yml`. При помощи этой функции вы можете, например, разрешить закидывать в котёл любой вид зерна для приготовления виски. Возможно сделать так, чтобы ингредиенты <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">влияли на качество</DynamicLink>.
+
+```yml
+- key: meat
+  display-name: Meat
+  materials:
+      - +pork # уменьшит итоговое качество напитка
+      - ++chicken # чуть-чуть уменьшит итоговое качество напитка
+      - +++beef # чуть-чуть улучшит итоговое качество напитка
+- key: horse_food
+  display-name: Horse Food
+  materials:
+      - "#minecraft:horse_food" # тэги тоже допускаются
+```
+
+<Callout title="Единственное ограничение">Использовать одну группу ингредиентов в качестве допустимого ингредиента внутри другой группы не получится.</Callout>
+
+## Использование в конфигурации рецепта
+
+Для указания группы ингредиентов в ингредиентах напитка нужно вписать в `ingredients:` её `key`, добавив перед ним префикс `#brewery:`. Например, приведённые выше группы правильно было бы указать вот так: `#brewery:meat`, `#brewery:horse_food`
+
+<Callout title="Namespaces">If you defined a key with its own namespace, something will fail</Callout>

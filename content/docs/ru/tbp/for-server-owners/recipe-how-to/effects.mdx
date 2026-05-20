@@ -1,0 +1,94 @@
+---
+title: "Эффекты"
+---
+
+import { DynamicLink } from "fumadocs-core/dynamic-link";
+
+## Вступление
+
+В TBP вы можете добавить эффекты зелий напиткам, они будут накладываться при выпивании бутылки.  
+Чтобы дать вашему напитку эффекты, их нужно добавить в секцию `effects:` вашего рецепта (который, в свою очередь, находится в `recipes.yml`)
+
+## Настройка эффектов 
+
+Каждый эффект описывается с помощью указания его типа, длительности, усиления (не уровня!). Их также можно сделать зависимыми от уровня качества готового напитка.
+
+### Формат
+
+Формат добавления рецептов следующий:
+
+```yaml
+effects:
+    - <EFFECT_TYPE>/<AMPLIFIER>/<DURATION>
+```
+
+- `EFFECT_TYPE`: Тип(id) эффекта (e.g., `SPEED`, `POISON`, `REGENERATION`). Полный список можно найти в [PaperMC's Javadocs](https://jd.papermc.io/paper/1.21.10/org/bukkit/potion/PotionEffectType.html).
+- `AMPLIFIER`: Усиление эффекта (не уровень, а то, на сколько уровней его усилить. То есть 0 = эффект I-го уровня, 1 = эффект II-го уровня, и т.д.)
+- `DURATION`: Длительность в секундах
+
+#### Разброс
+
+Можно также указать разбросы при помощи тире, чтобы добавить элемент случайности:
+
+```yaml
+effects:
+    - <EFFECT_TYPE>/<AMPLIFIER_MIN>-<AMPLIFIER_MAX>/<DURATION_MIN>-<DURATION_MAX>
+```
+
+Будет применено случайное значение между указанными минимумом и максимумом каждый раз при наложении эффекта.
+
+<Callout type="warn" title="Но ведь в BreweryX было не так!">
+
+Если вы переходите с BreweryX, то скорее всего вы в курсе, что там это работает по-другому: значение из разброса выбирается не случайно, а в зависимости от качества.
+
+В TBP такого больше нет, по крайней мере, в прежнем виде. Вместо этого вы можете сделать зависимый от качества эффект при помощи знакомого некоторым формата с плюсиками.
+
+</Callout>
+
+#### Эффекты, зависящие от качества
+
+Вы можете сделать так, чтобы эффект накладывался лишь при определённом уровне качества напитка, используя `+++`, `++` и `+`  
+Более подробно о "плюсиках" можно прочитать <DynamicLink href="/[lang]/docs/tbp/for-server-owners/reference/basics/#quality-factored-list">здесь</DynamicLink>.
+
+```yaml
+effects:
+    - +++<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # только у отличных
+    - ++<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # только у хороших
+    - +<EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # только у плохих
+    - <EFFECT_TYPE>/<AMPLIFIER>/<DURATION> # при любом качестве
+```
+
+## Примеры
+
+### Простенький пример
+
+Напиток, дающий Скорость II на 45 сек и Прыгучесть I на 30-60 (случайно) секунд:
+
+```yaml
+effects:
+    - SPEED/1/45-90
+    - JUMP_BOOST/0/30-60
+```
+
+### Более сложный пример
+
+- Сильное отравление при плохом качестве, слабое отравление при хорошем качестве, нет отравления при отличном качестве.
+- Скорость, увеличивающаяся в силе и длительности по мере улучшения качества
+- Регенерация и поглощение, только при отличном качестве.
+- Тошнота при любом качестве
+
+```yaml
+effects:
+    # poison
+    - +POISON/2/30-60 # Bad only: Poison III for 30-60 seconds
+    - ++POISON/1/20-40 # Good only: Poison II for 20-40 seconds
+    # speed
+    - +++SPEED/2/60-120 # Excellent only: Speed III for 60-120 seconds
+    - ++SPEED/1/45-90 # Good only: Speed II for 45-90 seconds
+    - +SPEED/0/30-60 # Bad only: Speed I for 30-60 seconds
+    # regeneration and absorption
+    - +++REGENERATION/1/15-30 # Excellent only: Regeneration II for 15-30 seconds
+    - +++ABSORPTION/1/60 # Excellent only: Absorption II for 60 seconds
+    # nausea
+    - NAUSEA/0/20-40 # All qualities: Nausea I for 20-40 seconds
+```

@@ -1,0 +1,482 @@
+---
+title: "Базовые рецепты"
+icon: CookingPot
+---
+
+<Callout title="Важно!" type="warn">
+    Администраторы серверов могут добавлять, менять и удалять рецепты, поэтому рецепты с этой страницы могут быть далеко не на каждом сервере.
+</Callout>
+
+```yaml title="recipes.yml"
+# !!! ВАЖНО: Конфиг BreweryX НЕ поддерживает внешние комментарии!
+# Если вы добавите собственные комментарии в файл, то они автоматически будут перезаписаны !!!
+# -- Рецепты напитков --
+
+# enabled: Включен ли рецепт или нет (true/false)
+
+# name: Названия для плохого/нормального/хорошего качества (Доступно форматирование, например &6 или hex-коды &#123123) 
+#   name: "Плохое пиво/Нормальное пиво/Отличное пиво, вот оно жидкое золото!"
+
+# ingredients: Список ингредиентов в формате 'материал/количество'
+#   Можно использовать /brew ItemName с предметом в руке, чтобы узнать его "материал" для конфига (как правило, это id предмета)
+#   Список материалов можно также найти тут: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+#   Плагинские материалы указываются форматом 'plugin:id/количество' (Поддерживаются: Brewery (другой напиток как ингредиент), Garden (BreweryX Garden Addon), Oraxen, ItemsAdder, Nexo, Slimefun)
+#   Например: '- itemsadder:grape/5'
+#   Кастом-айтемы из 'custom-items.yml' не требуют никаких префиксов ('- example_custom_item/10')
+#   Можно также использовать напитки как ингредиенты к другим напиткам. Правильный формат: 'brewery:ID/количество'
+#   Пример: '- brewery:wheatbeer/1'
+
+# cookingtime: Время (в минутах), на протяжении которого ингредиенты должны вариться
+
+# distillruns: Сколько раз нужно продистиллировать для полного содержания алкоголя (0 = не требует дистилляции. Но можно также просто не добавлять этот параметр)
+
+# distilltime: Сколько (в секундах) занимает один круг дистилляции (дефолтное время в плагине = 40 сек, дефолтное время ванильных зелий в зельеварке = 20)
+
+# wood: Тип дерева у бочки:
+#   Может быть буквенным значением, номером (см. ниже), или списком из видов дерева
+#   0=any 1=Birch 2=Oak 3=Jungle 4=Spruce
+#   5=Acacia 6=Dark Oak 7=Crimson 8=Warped
+#   9=Mangrove 10=Cherry 11=Bamboo 12=Cut Copper 13=Pale Oak
+#     Вместо номера можно использовать имя или id:
+#     wood: 13
+#     wood: pale_oak
+#     wood: Pale Oak
+#   Ванильная бочка из игры считается за дубовую
+
+# age: Время в "годах", которое напиток должен настаиваться в бочке. 0 = рецепт без настаивания (или просто не добавляйте wood и age в рецепт)
+
+# color: Цвет готового напитка.
+#   Встроенные цвета: DARK_RED, RED, BRIGHT_RED, ORANGE, YELLOW, PINK, PURPLE, BLUE, CYAN, WATER, TEAL, OLIVE, GREEN, LIME, BLACK, GREY, BRIGHT_GREY, WHITE
+#   Либо HEX-цвета (color: 99FF33) (гуглите "HTML color picker")
+
+# difficulty: Сложность (1-10) рецепта напитка. Чем выше число - тем более точно нужно следовать рецепту для получения идеального качества.
+
+# alcohol: Процент опьянения (до 100), добавляемый игроку при выпивании идеально приготовленного напитка. Может быть отрицательным.
+
+# lore: Дополнительное описание у напитка в инвентаре. Поддерживает цветовое форматирование, см. "name:" выше.
+#   Строки описания можно сделать отображаемыми при определенном уровне качества напитка, добавив + для плохого, ++ для среднего, или +++ для хорошего, перед началом текста:
+#   - +++ Это хороший напиток!
+#   - ++ Это среднячок.
+#   - + БояринЪ меня...
+#   - А эта строка будет показываться при любом качестве!
+
+# servercommands: Список команд, выполняемых от лица сервера при выпивании (плейсхолдеры %player_name%  %quality%)
+#   Можно сделать их выполнение зависящим от качества напитка при помощи плюсов (см. lore выше): 
+#   - +++ op %player_name%
+#   - ++ money give %player_name% 10
+#   - + kill %player_name%
+#   Команду можно сделать отложенной по времени, добавив "/ <amount>s" в конце:
+#   - op Jsinco / 3s
+
+# playercommands: Список команд, выполняемых от лица выпившего игрока при выпивании (плейсхолдеры %player_name%  %quality%)
+#   Можно сделать их выполнение зависящим от качества напитка при помощи плюсов (см. lore выше): 
+#   - +++ spawn
+#   - ++ home
+#   - + suicide
+#   Команду можно сделать отложенной по времени, добавив "/ <amount>s" в конце:
+#   - op Jsinco / 3s
+
+# drinkmessage: Сообщение в чате, возникающее при выпивании
+
+# drinktitle: Надпись на экране, возникающая при выпивании
+
+# glint: true/false - должна ли модель напитка переливаться, как у зачарованного предмета
+
+# customModelData: Custom Model Data тэг. Может использоваться для добавления кастомных текстур предмету.
+#   Можно задать сразу 3, для плохого/среднего/хорошего качества, разделяя номера через "/"
+#   customModelData: 1
+#   customModelData: 1/2/3
+
+# effects: Эффекты при выпивании в формате "эффект/уровень/длительность(сек)"
+#   Существующие эффекты: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html
+#   Разброс качества и/или длительности в зависимости от кач-ва можно задать при помощи "-", Например: 'SPEED/1-2/30-40' = lvl 1 скорость на 30сек при худшем качестве и lvl 2 скорость на 40сек при лучшем.
+#   В обратную сторону это тоже работает: 'POISON/3-1/20-5' - отравление будет слабее при улучшении качества.
+#   Максимальная длительность: 1638 сек. Мгновенным эффектам (лечение, урон, ...)указывать длительность необязательно.
+
+# 'ex' - это пример со всеми возможными аргументами:
+recipes:
+    ex:
+        enabled: true
+        name: Bad Example/Example/Good Example
+        ingredients:
+            - Bedrock/2
+            - Spruce_Planks/8
+            - Bedrock/1
+            - Brewery:Wheatbeer/2
+            - ExoticGarden:Grape/3
+            - ex-item/4
+        cookingtime: 3
+        distillruns: 2
+        distilltime: 60
+        wood: 4
+        age: 11
+        color: DARK_RED
+        difficulty: 3
+        alcohol: 14
+        lore:
+            - This is an example brew
+            - ++Just a normal Example
+            - This text would be on the brew
+            - + Smells disgusting
+            - ++ Smells alright
+            - +++ Smells really good
+        servercommands:
+            - +++ weather clear
+            - + weather rain
+        playercommands:
+            - homes
+        drinkmessage: Tastes good
+        drinktitle: Warms you from inside
+        glint: true
+        customModelData: 556/557/557
+        effects:
+            - FIRE_RESISTANCE/20
+            - HEAL/1
+            - WEAKNESS/2-3/50-60
+            - POISON/1-0/20-0
+    wheatbeer:
+        name: Skunky Wheatbeer/Wheatbeer/Fine Wheatbeer
+        ingredients:
+            - Wheat/3
+        cookingtime: 8
+        distillruns: 0
+        wood: 1
+        age: 2
+        color: ffb84d
+        difficulty: 1
+        alcohol: 5
+        lore:
+            - +++ &8Refreshing
+    beer:
+        name: Skunky Beer/Beer/Fine Beer
+        ingredients:
+            - Wheat/6
+        cookingtime: 8
+        distillruns: 0
+        wood: 0
+        age: 3
+        color: ffd333
+        difficulty: 1
+        alcohol: 6
+        lore:
+            - +++ &8Crisp taste
+    darkbeer:
+        name: Skunky Darkbeer/Darkbeer/Fine Darkbeer
+        ingredients:
+            - Wheat/6
+        cookingtime: 8
+        distillruns: 0
+        wood: 6
+        age: 8
+        color: "650013"
+        difficulty: 2
+        alcohol: 7
+        lore:
+            - +++ &8Roasted taste
+    wine:
+        name: Red Wine
+        ingredients:
+            - Sweet_Berries/5
+        cookingtime: 5
+        distillruns: 0
+        wood: 0
+        age: 20
+        color: RED
+        difficulty: 4
+        alcohol: 8
+        lore:
+            - + &8Harsh
+            - + &8Corked
+            - ++ &8Mellow
+            - +++ &8Full-Bodied
+    mead:
+        name: Awkward Mead/Mead/&6Golden Mead
+        ingredients:
+            - Sugar_Cane/6
+        cookingtime: 3
+        distillruns: 0
+        wood: 2
+        age: 4
+        color: ORANGE
+        difficulty: 2
+        alcohol: 9
+        lore:
+            - +++ Has a golden shine
+    ap_mead:
+        name: Apple Mead/Sweet Apple Mead/&6Sweet Golden Apple Mead
+        ingredients:
+            - Sugar_Cane/6
+            - Apple/2
+        cookingtime: 4
+        distillruns: 0
+        wood: 2
+        age: 4
+        color: ORANGE
+        difficulty: 4
+        alcohol: 11
+        lore:
+            - Is there any Apple in this?
+            - Refreshing taste of Apple
+            - Sweetest hint of Apple
+        effects:
+            - WATER_BREATHING/1-2/150
+    cidre:
+        name: Poor Cidre/Apple Cider/Great Apple Cider
+        ingredients:
+            - Apple/14
+        cookingtime: 7
+        distillruns: 0
+        wood: 0
+        age: 3
+        color: f86820
+        difficulty: 4
+        alcohol: 7
+    apple_liquor:
+        name: Sour Apple Liquor/Apple Liquor/Calvados
+        ingredients:
+            - Apple/12
+        cookingtime: 16
+        distillruns: 3
+        wood: 5
+        age: 6
+        color: BRIGHT_RED
+        difficulty: 5
+        alcohol: 14
+        lore:
+            - +Sour like Acid
+            - +++ Good Apple Liquor
+    whiskey:
+        name: Unsightly Whiskey/Whiskey/Scotch Whiskey
+        ingredients:
+            - Wheat/10
+        cookingtime: 10
+        distillruns: 2
+        distilltime: 50
+        wood: 4
+        age: 18
+        color: ORANGE
+        difficulty: 7
+        alcohol: 26
+        lore:
+            - "&7Single Malt"
+    rum:
+        name: Bitter Rum/Spicy Rum/&6Golden Rum
+        ingredients:
+            - Sugar_Cane/18
+        cookingtime: 6
+        distillruns: 2
+        distilltime: 30
+        wood: 2
+        age: 14
+        color: DARK_RED
+        difficulty: 6
+        alcohol: 30
+        lore:
+            - + &8Too bitter to drink
+            - ++ &8Spiced by the barrel
+            - +++ &eSpiced Gold
+        effects:
+            - FIRE_RESISTANCE/1/20-100
+            - POISON/1-0/30-0
+    vodka:
+        name: Lousy Vodka/Vodka/Russian Vodka
+        ingredients:
+            - Potato/10
+        cookingtime: 15
+        distillruns: 3
+        age: 0
+        color: WHITE
+        difficulty: 4
+        alcohol: 20
+        lore:
+            - + &8Almost undrinkable
+        effects:
+            - WEAKNESS/15
+            - POISON/10
+    shroom_vodka:
+        name: Mushroom Vodka/Mushroom Vodka/Glowing Mushroom Vodka
+        ingredients:
+            - Potato/10
+            - Red_Mushroom/3
+            - Brown_Mushroom/3
+        cookingtime: 18
+        distillruns: 5
+        age: 0
+        color: ff9999
+        difficulty: 7
+        alcohol: 18
+        lore:
+            - +++&aGlows in the dark
+        effects:
+            - WEAKNESS/80
+            - CONFUSION/27
+            - NIGHT_VISION/50-80
+            - BLINDNESS/12-2
+            - SLOW/10-3
+    gin:
+        name: Pale Gin/Gin/Old Tom Gin
+        ingredients:
+            - Wheat/9
+            - blue-flowers/6
+            - Apple/1
+        cookingtime: 6
+        distillruns: 2
+        color: 99ddff
+        difficulty: 6
+        alcohol: 20
+        lore:
+            - ++ With the
+            - ++ taste of juniper
+            - +++ Perfectly finished off
+            - +++ with juniper
+    tequila:
+        name: Mezcal/Tequila/Tequila anejo
+        ingredients:
+            - cactus/8
+        cookingtime: 15
+        distillruns: 2
+        wood: 1
+        age: 12
+        color: f5f07e
+        difficulty: 5
+        alcohol: 20
+        lore:
+            - Desert spirit
+    absinthe:
+        name: Poor Absinthe/Absinthe/Strong Absinthe
+        ingredients:
+            - Grass/15
+        cookingtime: 3
+        distillruns: 6
+        distilltime: 80
+        color: GREEN
+        difficulty: 8
+        alcohol: 42
+        lore:
+            - +++&8High proof liquor
+        effects:
+            - POISON/15-25
+    gr_absinthe:
+        name: Poor Absinthe/Green Absinthe/Bright Green Absinthe
+        ingredients:
+            - Grass/17
+            - Poisonous_Potato/2
+        cookingtime: 5
+        distillruns: 6
+        distilltime: 85
+        color: LIME
+        difficulty: 9
+        alcohol: 46
+        lore:
+            - "&aLooks poisonous"
+        effects:
+            - POISON/25-40
+            - HARM/2
+            - NIGHT_VISION/40-60
+    potato_soup:
+        name: Potato soup
+        ingredients:
+            - Potato/5
+            - Grass/3
+        cookingtime: 3
+        color: ORANGE
+        difficulty: 1
+        effects:
+            - HEAL/0-1
+    coffee:
+        name: Stale Coffee/Coffee/Strong Coffee
+        ingredients:
+            - Cocoa_Beans/12
+            - Milk_Bucket/2
+        cookingtime: 2
+        color: BLACK
+        difficulty: 3
+        alcohol: -6
+        lore:
+            - + &8Probably a week old
+        effects:
+            - REGENERATION/1/2-5
+            - SPEED/1/30-140
+    eggnog:
+        name: Egg Liquor/Eggnog/Advocaat
+        ingredients:
+            - Egg/5
+            - Sugar/2
+            - Milk_Bucket/1
+        cookingtime: 2
+        age: 3
+        color: ffe680
+        difficulty: 4
+        alcohol: 10
+        lore:
+            - Made with raw egg
+    g_vodka:
+        name: Rancid Vodka/&6Golden Vodka/&6Shimmering Golden Vodka
+        ingredients:
+            - Potato/10
+            - Gold_Nugget/2
+        cookingtime: 18
+        distillruns: 3
+        age: 0
+        color: ORANGE
+        difficulty: 6
+        alcohol: 20
+        effects:
+            - WEAKNESS/28
+            - POISON/4
+    fire_whiskey:
+        name: Powdery Whiskey/Burning Whiskey/Blazing Whiskey
+        ingredients:
+            - Wheat/10
+            - Blaze_Powder/2
+        cookingtime: 12
+        distillruns: 3
+        distilltime: 55
+        wood: 4
+        age: 18
+        color: ORANGE
+        difficulty: 7
+        alcohol: 28
+        drinkmessage: You get a burning feeling in your mouth
+    hot_choc:
+        name: Hot Chocolate
+        ingredients:
+            - cookie/3
+        cookingtime: 2
+        color: DARK_RED
+        difficulty: 2
+        effects:
+            - FAST_DIGGING/40
+    iced_coffee:
+        name: Watery Coffee/Iced Coffee/Strong Iced Coffee
+        ingredients:
+            - cookie/8
+            - snowball/4
+            - milk_bucket/1
+        cookingtime: 1
+        color: BLACK
+        difficulty: 4
+        alcohol: -8
+        effects:
+            - REGENERATION/30
+            - SPEED/10
+
+# More recipe ideas:
+# Dandelion Liquor
+# Beetroot Spirit
+# Poppy Liquor: Macum/Grand Poppy
+# Bamboo Liquor: Chu Yeh Ching
+# Cachaca
+# Cognac
+# Sake
+# Buorbon
+# Moonshine
+# Different Wines
+# Brandy
+# Amaretto
+# etc. as well as variations like,
+# Pumpkin Spice Beer
+# Melon Vodka
+
+# There are a lot of items in Minecraft like Vines, Milk and items added by plugins that would make great ingredients.
+```

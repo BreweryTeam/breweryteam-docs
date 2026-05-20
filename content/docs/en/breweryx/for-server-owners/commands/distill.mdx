@@ -1,0 +1,23 @@
+---
+title: "/breweryx distill"
+hideTitle: true
+---
+
+import { Command, CommandExecutor } from "@/components/command.tsx";
+
+<Command
+    name="/breweryx distill"
+    subcommands={[
+        {
+            syntax: "/breweryx distill [times]",
+            permission: "brewery.cmd.create",
+        },
+    ]}
+    executor={CommandExecutor.PLAYER_ONLY}
+/>
+
+Distills the brew in your hand a specified number of times.
+
+## Arguments
+
+- `[times]`: The number of times to distill the brew. Defaults to 1.
